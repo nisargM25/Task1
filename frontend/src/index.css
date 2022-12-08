@@ -1,0 +1,38 @@
+.App{
+  margin: 0;
+  padding: 0;
+  height: 100vh; 
+   background-image: url("../public/images/BackGround.jpg");
+   background-size: cover;
+   vertical-align: middle;
+}
+.row{
+  height: 100vh;
+}
+.btn-color{
+   background-color: #0e1c36;
+   color: #fff;
+   
+ }
+ .m-auto{
+margin: auto !important;
+ }
+ .profile-image-pic{
+   height: 150px;
+   width: 150px;
+   object-fit: cover;
+ }
+   
+ a{
+   text-decoration: none;
+ }
+ .container{
+     margin:0 auto;
+     
+ }
+ .alert{
+     display: none;
+ }
+ .success-container{
+     text-align: center;
+ }
