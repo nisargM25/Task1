@@ -1,9 +1,13 @@
 import Login from "../component/Login"
 import Register from "../component/Register"
 import {Routes, Route } from "react-router-dom"
+import { useContext } from "react";
+import { AuthContext } from "../context/auth";
+import Profile from "../component/Profile";
 
 
 const Home = () => {
+    const { currentUser } = useContext(AuthContext);
     return (
         <div>
             <div className="container">
@@ -11,10 +15,9 @@ const Home = () => {
                     <div className="col-md-5 m-auto offset-md-3">
                         <div className="card">
                             <Routes>
-                                <Route>
                                     <Route path='/register' element={<Register />} />
-                                    <Route path='/' element={<Login />} />
-                                </Route>
+                                    <Route path='/' element={!currentUser?<Login />:<Profile/>} />
+                                    {/* <Route path='/profile' element={currentUser?<Profile />:<Login/>} /> */}
                             </Routes>
                         </div>
                     </div>
