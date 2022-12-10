@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Register = () => {
@@ -24,16 +26,16 @@ const Register = () => {
                 console.log("Done This");
                 navigate("/");
             } catch (error) {
-                alert(error.response.data)
+                toast.error(error.response.data)
             }
         }
     }
     useEffect(() => {
         if (Object.keys(errorMessage).length > 0) {
-            if (errorMessage.name) alert(errorMessage.name)
-            if (errorMessage.email) alert(errorMessage.email)
-            if (errorMessage.mobile) alert(errorMessage.mobile)
-            if (errorMessage.password) alert(errorMessage.password)
+            if (errorMessage.name) toast.error(errorMessage.name)
+            if (errorMessage.email) toast.error(errorMessage.email)
+            if (errorMessage.mobile) toast.error(errorMessage.mobile)
+            if (errorMessage.password) toast.error(errorMessage.password)
         }
 
 
@@ -51,23 +53,24 @@ const Register = () => {
                     <input type="text" onChange={handleChange} className="form-control" name="name" id="Username" placeholder="User Name" />
                 </div>
                 <div className="my-3">
-                    <input type="email" onChange={handleChange} className="form-control" name="email" id="Email" placeholder="Email" />
+                    <input type="email" onChange={handleChange} className="form-control" name="email" id="Email" placeholder="Email Id" />
                 </div>
                 <div className="my-3">
-                    <input type="text" onChange={handleChange} className="form-control" name="mobile" id="phno" placeholder="Enter 10 Digit Mobile Number" />
+                    <input type="text" onChange={handleChange} className="form-control" name="mobile" id="Mobile" placeholder="Enter 10 Digit Mobile Number" />
                 </div>
                 <div className="mb-3">
-                    <input type="password" onChange={handleChange} className="form-control" name="password" id="password" placeholder="password" />
+                    <input type="password" onChange={handleChange} className="form-control" name="password" id="Password" placeholder="Password" />
                 </div>
                 <div className="text-center">
                     <button type="submit" className="btn btn-outline-dark px-1 mb-2 w-100" >Register</button>
                 </div>
                 <div className="text-center">
                     <p>
-                        Already have an account?<Link to='/'>Login</Link>
+                        Already have an account? <Link to='/'>Login</Link>
                     </p>
                 </div>
             </form>
+            <ToastContainer position="top-right" autoClose={4000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
         </div>
     )
 }
@@ -80,27 +83,27 @@ const validator = (user) => {
     // error object
     let err = {}
     if (!user.name.trim()) {
+        document.getElementById("Username").focus();
         err.name = "Username is required";
-        if (!user.name.trim()) {
-
-        }
-        else {
-            if (!user.email.trim()) {
-                err.email = "Email is required";
-                if (!user.email.trim()) { }
-                else{
-                    if (!user.password.trim()) {
-                        err.password = "Password is required";
-                    }
-                }
-            }
-        }
     }
-    if (user.mobile.trim()) {
+    else if (!user.email.trim()) {
+        document.getElementById("Email").focus();
+        err.email = "Email is required";
+    }
+    else if (!user.mobile.trim()) {
+        document.getElementById("Mobile").focus();
+        err.mobile = "Mobile Number is required";
+    }
+    else if (user.mobile.trim()) {
         var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
         if (!user.mobile.match(phoneno)) {
+            document.getElementById("Mobile").focus();
             err.mobile = "Enter 10 Digit Mobile Number";
         }
+    }
+    else if (!user.password.trim()) {
+        document.getElementById("Password").focus();
+        err.password = "Password is required";
     }
 
     return err;
