@@ -59,7 +59,7 @@ const Register = () => {
                     <input type="text" onChange={handleChange} className="form-control" name="mobile" id="Mobile" placeholder="Enter 10 Digit Mobile Number" />
                 </div>
                 <div className="mb-3">
-                    <input type="password" onChange={handleChange} className="form-control" name="password" id="Password" placeholder="Password" />
+                    <input type="password" onChange={handleChange} className="form-control" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title = "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="Password" placeholder="Password" />
                 </div>
                 <div className="text-center">
                     <button type="submit" className="btn btn-outline-dark px-1 mb-2 w-100" >Register</button>
