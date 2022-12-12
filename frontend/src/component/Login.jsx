@@ -20,7 +20,6 @@ const Login = () => {
         initialValues,
         validationSchema: signInSchema,
         onSubmit: async (values, action) => {
-
             try {
                 await login(values)
                 navigate("/");
@@ -28,7 +27,6 @@ const Login = () => {
                 // console.log(error)
                 toast.error(error.response.data)
             }
-
             action.resetForm();
         },
     },
@@ -43,7 +41,7 @@ const Login = () => {
                     <img src="https://www.autodap.parts/img/logo-top.svg" className="img-fluid  img-thumbnail my-2" alt="profile" />
                 </div>
                 <div className="my-3">
-                    <input type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className="form-control" name="name" id="Username" placeholder="Enter Username or Password" />
+                    <input type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className="form-control" name="name" id="Username" placeholder="Enter Username or Email Id" />
                     {errors.name && touched.name ? <p className='form-error'>{errors.name}</p> : null}
                 </div>
                 <div className="mb-3">
