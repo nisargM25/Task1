@@ -1,6 +1,6 @@
 import Login from "../component/Login"
 import Register from "../component/Register"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { useContext } from "react";
 import { AuthContext } from "../context/auth";
 import Profile from "../component/Profile";
@@ -17,7 +17,8 @@ const Home = () => {
                             <Routes>
                                 <Route path='/register' element={<Register />} />
                                 <Route path='/' element={!currentUser ? <Login /> : <Profile />} />
-                                <Route path='*' element={!currentUser ? <Login /> : <Profile />}/>
+                                {/* <Route path='*' element={!currentUser ? <Login /> : <Profile />}/> */}
+                                <Route path="*" element={<Navigate replace to="/" />} />
                             </Routes>
                         </div>
                     </div>
