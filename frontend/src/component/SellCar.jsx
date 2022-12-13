@@ -16,7 +16,7 @@ const SellCar = () => {
         model: "",
         date: "",
         miles: "",
-        images:null,
+        images:"",
         price: "",
         sid:currentUser.id,
     }
@@ -31,7 +31,7 @@ const SellCar = () => {
                 try {
                     const formData = new FormData();
                     console.log(values.images)
-                    formData.append("file", values.images);
+                    formData.append("images", values.images);
                     console.log(formData);
                     const res = await axios.post("http://10.0.3.98:9000/upload", formData);
                     return res.data
@@ -40,7 +40,7 @@ const SellCar = () => {
                 }
             }
             const imgUrl = await upload();
-            console.log(imgUrl)
+            alert(imgUrl)
             // try {
             //     await axios.post("http://10.0.3.98:9000/api/auth/register", values)
             //     console.log("Done This");

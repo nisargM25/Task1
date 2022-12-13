@@ -8,6 +8,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+
 app.use("/api/auth", authRoutes)
 app.use("/api/cars", carRoutes)
 
@@ -17,16 +18,14 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       
-      cb(null, Date.now()+file.fieldname)
+      cb(null, Date.now()+file.originalname)
     }
   })
 const upload = multer({ storage })
 
-app.post('/upload', upload.single('images'), function (req, res) {
-    // const file = req.file;
-    console.log(req.file)
-    // console.log(req.body.file)
-    // res.json(file)
+app.post('/upload', upload.array('images'), function (req, res) {
+    const file = req.file;
+    res.json(file)
 })
 
 
