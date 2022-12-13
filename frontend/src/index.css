@@ -1,15 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,700');
+html{
+  scrollbar-width: none;
+}
+
 .App{
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  height: 100vh; 
-   background-image: url("../public/images/BackGround.jpg");
-   background-size: cover;
-   vertical-align: middle;
+  height: 100vh;  
+  
+  background-image: url("../public/images/BackGround.jpg");
+  background-size: cover;
 }
-.row{
-  height: 100vh;
+.App>.container{
+  height: calc(100vh - 56px);
+}
+.RowMain{
+  height: calc(100vh - 56px);
 }
 .btn-color{
    background-color: #0e1c36;
@@ -59,3 +66,10 @@ margin: auto !important;
    color: red;
    font-size: 12px;
  }
+
+ .dropdown-menu {
+  top: 100%;
+  right: 0;
+  margin-top: var(--bs-dropdown-spacer);
+}
+
