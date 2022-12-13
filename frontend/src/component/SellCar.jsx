@@ -26,7 +26,7 @@ const SellCar = () => {
         initialValues,
         // validationSchema: signUpSchema,
         onSubmit: async (values, action) => {
-            // console.log(values)
+            console.log(values)
             const upload = async () => {
                 try {
                     const formData = new FormData();
@@ -58,7 +58,7 @@ const SellCar = () => {
                 <div className="RowMain row">
                     <div className="col-md-5 m-auto offset-md-3">
                         <div className="card">
-                            <form className="card-body cardbody-color p-lg-5" onSubmit={handleSubmit}>
+                            <form className="card-body cardbody-color p-lg-5" encType="multipart/form-data" onSubmit={handleSubmit}>
                                 <h1 className="text-center text-dark mb-1">Car Details</h1>
                                 <div className="my-3">
                                     <input type="text" value={values.make} onChange={handleChange} onBlur={handleBlur} className="form-control" name="make" id="Make" placeholder="Company Name" />
@@ -78,7 +78,7 @@ const SellCar = () => {
                                     {errors.name && touched.name ? <p className='form-error'>{errors.name}</p> : null}
                                 </div>
                                 <div className="my-3">
-                                    <input type="file" accept='image/*' onChange={(e) => setFieldValue("images", e.target.files[0].name)} onBlur={handleBlur} className="form-control" name="images" id="Images" />
+                                    <input type="file" accept='image/*' onChange={(e) => setFieldValue("images", e.currentTarget.files[0])} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.name && touched.name ? <p className='form-error'>{errors.name}</p> : null}
                                 </div>
                                 <div className="my-3">
