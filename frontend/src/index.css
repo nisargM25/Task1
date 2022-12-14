@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,700');
+
 html{
   scrollbar-width: none;
 }
-
 .App{
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   height: 100vh;  
-  
   background-image: url("../public/images/BackGround.jpg");
   background-size: cover;
 }
@@ -72,4 +71,13 @@ margin: auto !important;
   right: 0;
   margin-top: var(--bs-dropdown-spacer);
 }
-
+.para{
+  color: black;
+}
+.navbarBrand{
+  width: 110px;
+}
+.nav-link{
+  font-weight: 600;
+  font-size: 18px;
+}

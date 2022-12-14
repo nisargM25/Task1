@@ -18,10 +18,10 @@ function App() {
       <Routes>
         <Route path='/register' element={!currentUser&&<Register />} />
         <Route path='/' element={!currentUser ? <Login /> : <Home />} />
-        <Route path='/profile' element={!currentUser ? <Login /> : <Profile />} />
-        <Route path='/sellcar' element={!currentUser ? <Login /> : <SellCar />} />
-        {/* <Route path='*' element={!currentUser ? <Login /> : <Profile />}/> */}
+        <Route path='/profile' element={currentUser ? <Profile /> :<Navigate replace to="/" /> } />
+        <Route path='/sellcar' element={currentUser ? <SellCar />:<Navigate replace to="/" />} />
         <Route path="*" element={<Navigate replace to="/" />} />
+        {/* <Route path='*' element={!currentUser ? <Login /> : <Profile />}/> */}
       </Routes>
     </div>
   );

@@ -10,11 +10,20 @@ export const getAllCars=(req,res)=>{
 
 
 export const sellCar=(req,res)=>{
-    // const q="INSERT INTO `vehicle` (`make`, `model`, `dateOfManufacturing`, `miles`, `images`, `sellingPriceRange`, `seller_id`) VALUES (?)";
-    // const values;
-    // db.query(q, [values], (err, data) => {
-    //     if (err) return res.status(500).json(err)
-    //     return res.json("Car Added")
-    // })
-    res.json("caradded")
+    const q="INSERT INTO `vehicle` (`make`, `model`,`registrationNumber` ,`dateOfManufacturing`, `miles`, `images`, `sellingPriceRange`, `seller_id`) VALUES (?)";
+    const values = [
+        req.body.make,
+        req.body.model,
+        req.body.regNo,
+        req.body.date,
+        req.body.miles,
+        req.body.images,
+        req.body.price,
+        req.body.sid,     
+    ]
+    // console.log(values)
+    db.query(q, [values], (err, data) => {
+        if (err) return res.status(500).json(err)
+        return res.status(200).json("Car Added")
+    })
 }

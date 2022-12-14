@@ -3,8 +3,7 @@ import { getAllCars, sellCar } from '../controllers/product.js';
 
 const router=express.Router();
 
-router.get("/:id",getAllCars);
-router.post("/",sellCar);
+router.get("/",getAllCars);
+router.post("/sellcar",sellCar);
 
 export default router
-

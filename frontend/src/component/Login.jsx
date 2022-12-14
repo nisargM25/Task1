@@ -55,7 +55,7 @@ const Login = () => {
                                 <div className="text-center"><button type="submit" className="btn btn-outline-dark px-1 mb-2 w-100" >Login</button>
                                 </div>
                                 <div className="text-center">
-                                    <p>
+                                    <p className="para">
                                         Don't have an account? <Link to='/Register'>Register</Link>
                                     </p>
                                 </div>

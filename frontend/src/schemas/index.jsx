@@ -14,3 +14,12 @@ export const signInSchema = Yup.object({
     name: Yup.string().min(4).max(25).required("Please enter your Username or Email"),
     password: Yup.string().min(8).required("Please enter your password")
 });
+export const sellCarValidation = Yup.object({
+    make: Yup.string().required("Company Name of car is Required"),
+    model: Yup.string().required("Car Name is Required"),
+    regNo: Yup.string().min(6,"Car Number must be of 6 digits").required("Car Number is Required"),
+    date: Yup.date().required("Manufacturing Date is Required"),
+    miles: Yup.number().required("Number of Miles is Required"),
+    images: Yup.string().required("Atleast 1 image of the car is Required"),
+    price: Yup.string().required("Price Range of the car"),
+});

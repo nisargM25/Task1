@@ -22,8 +22,7 @@ const Register = () => {
         validationSchema: signUpSchema,
         onSubmit: async (values, action) => {
             try {
-                await axios.post("http://10.0.3.98:9000/api/auth/register", values)
-                console.log("Done This");
+                await axios.post("http://10.0.3.98:9000/api/auth/register", values);
                 navigate("/");
             } catch (error) {
                 toast.error(error.response.data)
@@ -69,7 +68,7 @@ const Register = () => {
                                     <button type="submit" className="btn btn-outline-dark px-1 mb-2 w-100" >Register</button>
                                 </div>
                                 <div className="text-center">
-                                    <p>
+                                    <p className="para">
                                         Already have an account? <Link to='/'>Login</Link>
                                     </p>
                                 </div>

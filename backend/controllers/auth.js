@@ -53,7 +53,8 @@ export const login = (req, res) => {
                 const isPasswordCorrect = bcrypt.compareSync(req.body.password, data[0].password)
                 if (!isPasswordCorrect) return res.status(400).json("Wrong Email or Password")
                 const token = jwt.sign({ id: data[0].id }, "jwtkeyClient");
-                const { pass, ...other } = data[0]
+                console.log(token)
+                const { password, ...other } = data[0]
                 flag = 1;
                 res.cookie("access_token", token, { httpOnly: true }).status(200).json(other)
             })
@@ -63,6 +64,7 @@ export const login = (req, res) => {
             const isPasswordCorrect = bcrypt.compareSync(req.body.password, data[0].password)
             if (!isPasswordCorrect) return res.status(400).json("Wrong Email or Password")
             const token = jwt.sign({ id: data[0].id }, "jwtkeyClient");
+            console.log(token)
             const { pass, ...other } = data[0]
             flag = 1;
             res.cookie("access_token", token, { httpOnly: true }).status(200).json(other)

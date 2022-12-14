@@ -8,7 +8,7 @@ const Profile = () => {
             <div className="container">
                 <div className="RowMain row">
                     <div className="col-md-5 m-auto offset-md-3">
-                        <div className="card">
+                        <div className="card para">
                             <div className='profile-container'>
                                 <div className="card profile" >
                                     <img src="https://www.autodap.parts/img/logo-top.svg" className="card-img-top logo img-thumbnail" alt="..." />
