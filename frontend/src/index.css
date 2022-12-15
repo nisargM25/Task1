@@ -81,3 +81,7 @@ margin: auto !important;
   font-weight: 600;
   font-size: 18px;
 }
+.navbar a:focus
+{
+  color: rgba(0, 0, 0, 0.9) !important;
+}

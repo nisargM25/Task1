@@ -5,17 +5,13 @@ import bcrypt from 'bcryptjs';
 export const register = (req, res) => {
     //Check exisiting user
 
-    const q = "Select * from user where name=?"
-    db.query(q, [req.body.name], (err, data) => {
+    const q = "Select * from user where name=? or email=?"
+    db.query(q, [req.body.name,req.body.email], (err, data) => {
         if (err) return res.json(err);
         if (data.length) {
             return res.status(409).json("User Already Exist");
         }
         else {
-            const p = "Select * from user where email=?";
-            if (err) return res.json(err);
-            if (data.length) return res.status(409).json("User Already Exist");
-
             //Hash the Password and create a user
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password, salt);
@@ -52,11 +48,11 @@ export const login = (req, res) => {
                 // check password
                 const isPasswordCorrect = bcrypt.compareSync(req.body.password, data[0].password)
                 if (!isPasswordCorrect) return res.status(400).json("Wrong Email or Password")
-                const token = jwt.sign({ id: data[0].id }, "jwtkeyClient");
-                console.log(token)
+                const token = jwt.sign({ id: data[0].id }, "jwtkeyClient",{expiresIn:"2h"});
+                // console.log(token)
                 const { password, ...other } = data[0]
                 flag = 1;
-                res.cookie("access_token", token, { httpOnly: true }).status(200).json(other)
+                res.cookie("access_token", token, { httpOnly: true}).status(200).json(other)
             })
         }
         else {
@@ -64,18 +60,16 @@ export const login = (req, res) => {
             const isPasswordCorrect = bcrypt.compareSync(req.body.password, data[0].password)
             if (!isPasswordCorrect) return res.status(400).json("Wrong Email or Password")
             const token = jwt.sign({ id: data[0].id }, "jwtkeyClient");
-            console.log(token)
+            // console.log(token)
             const { pass, ...other } = data[0]
             flag = 1;
-            res.cookie("access_token", token, { httpOnly: true }).status(200).json(other)
+            res.cookie("access_token", token, { httpOnly: true}).status(200).json(other)
         }
     })
 }
 
 export const logout = (req, res) => {
-    res.clearCookie("access_token", {
-        sameSite: "none",
-        secure: true
-    }).status(200).json("Logged Out")
+    res.clearCookie('access_token',{ httpOnly: true}).status(200).json("Logged Out"); 
+    // res.clearCookie("access_token",{ httpOnly: true, sameSite:"none",secure:true }).status(200).json("Logged Out")
 
 }

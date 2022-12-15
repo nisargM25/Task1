@@ -7,7 +7,12 @@ import cookieParser from 'cookie-parser';
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(express.urlencoded({extended:true,}))
+const corsOptions = {
+  origin: true, //included origin as true
+  credentials: true, //included credentials as true
+};
+app.use(cors(corsOptions))
 app.use(cookieParser())
 
 
@@ -41,7 +46,7 @@ app.post('/uploads', upload.array('images'), function (req, res) {
       // console.log(img+" "+index)
       allImg===""? allImg = img:allImg +=","+img;
     }
-    console.log(allImg+" ::All");
+    // console.log(allImg+" ::All"); 
     return res.json(allImg);
 })
 

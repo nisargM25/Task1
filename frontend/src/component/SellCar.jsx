@@ -26,7 +26,7 @@ const SellCar = () => {
     const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } = useFormik({
         initialValues,
         validationSchema: sellCarValidation,
-        onSubmit: async (values, action) => {
+        onSubmit: async (values) => {
             console.log(values.images[0])
             const upload = async () => {
                 try {
@@ -51,7 +51,7 @@ const SellCar = () => {
                 toast.error(error.response.data)
             }
             
-            action.resetForm();
+            // action.resetForm();
         },
     });
     return (
@@ -63,7 +63,7 @@ const SellCar = () => {
                             <form className="card-body cardbody-color p-lg-5" encType="multipart/form-data" onSubmit={handleSubmit}>
                                 <h1 className="text-center text-dark mb-1">Car Details</h1>
                                 <div className="my-3">
-                                    <input type="text" value={values.make} onChange={handleChange} onBlur={handleBlur} className="form-control" name="make" id="Make" placeholder="Company Name" />
+                                    <input type="text" value={values.make} onChange={handleChange} onBlur={handleBlur} className="form-control" name="make" id="Make" placeholder="Car Make" />
                                     {errors.make && touched.make ? <p className='form-error'>{errors.make}</p> : null}
                                 </div>
                                 <div className="my-3">
@@ -71,7 +71,7 @@ const SellCar = () => {
                                     {errors.model && touched.model ? <p className='form-error'>{errors.model}</p> : null}
                                 </div>
                                 <div className="my-3">
-                                    <input type="text" value={values.regNo} onChange={handleChange} onBlur={handleBlur} className="form-control" name="regNo" id="RegNo" placeholder="Car Number" />
+                                    <input type="text" value={values.regNo} onChange={handleChange} onBlur={handleBlur} className="form-control" name="regNo" id="RegNo" placeholder=" Registration Plate/License Number" />
                                     {errors.regNo && touched.regNo ? <p className='form-error'>{errors.regNo}</p> : null}
                                 </div>
                                 <div className="my-3 form-floating">
@@ -84,7 +84,7 @@ const SellCar = () => {
                                     {errors.miles && touched.miles ? <p className='form-error'>{errors.miles}</p> : null}
                                 </div>
                                 <div className="my-3">
-                                    <input type="file" accept='image/*' multiple onChange={(e) => setFieldValue("images", e.currentTarget.files,console.log(e.currentTarget.files))} onBlur={handleBlur} className="form-control" name="images" id="Images" />
+                                    <input type="file" accept='image/*' multiple onChange={(e) => setFieldValue("images", e.currentTarget.files)} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.images && touched.images ? <p className='form-error'>{errors.images}</p> : null}
                                 </div>
                                 <div className="my-3">
@@ -96,7 +96,7 @@ const SellCar = () => {
                                 </div>
 
                             </form>
-                            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+                            <ToastContainer position="top-right" autoClose={6000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
                         </div>
                     </div>
                 </div>

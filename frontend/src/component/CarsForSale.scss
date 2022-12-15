@@ -201,12 +201,12 @@ a, a:hover {
     }
 
     &:nth-child(2n+1) .postcard__text::before {
-      left: -12px !important;
+      left: -18px !important;
       transform: rotate(4deg);
     }
 
     &:nth-child(2n+0) .postcard__text::before {
-      left: -12px !important;
+      left: -18px !important;
       transform: rotate(4deg);
     }
   }

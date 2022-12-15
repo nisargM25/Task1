@@ -15,10 +15,10 @@ const CarsForSale = () => {
                 console.log(err)
             }
         }
-        fetchProducts();
-    })
+        fetchProducts()
+    }, [])
     // console.log(cars)
-    
+
     return (
         <div className='dark'>
 
@@ -30,7 +30,7 @@ const CarsForSale = () => {
                             cars.map(car => (
 
                                 <article className="postcard dark blue" key={car.id}>
-                                    < img className="postcard__img" src={`./upload/${car.images.split(",").splice(0,1)}`} alt="ImageTitle" />
+                                    < img className="postcard__img" src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="ImageTitle" />
                                     <div className="postcard__text">
                                         <h1 className="postcard__title blue"><Link to="/">{car.make} {car.model}</Link></h1>
                                         <div className="postcard__subtitle small">
@@ -47,9 +47,11 @@ const CarsForSale = () => {
                                         </div>
                                     </div>
                                 </article>
-                            ))) : (<div>
+                            ))) : (
+                            <div>
                                 <h1> No Car For Sale</h1>
-                            </div>)
+                            </div>
+                        )
                     }
                 </div>
             </section>
