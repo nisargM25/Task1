@@ -27,7 +27,7 @@ const SellCar = () => {
         initialValues,
         validationSchema: sellCarValidation,
         onSubmit: async (values) => {
-            console.log(values.images[0])
+            // console.log(values.images[0])
             const upload = async () => {
                 try {
                     const formData = new FormData();
@@ -45,7 +45,7 @@ const SellCar = () => {
             values.images = imgUrl;
             // alert(values.images);
             try {
-                await axios.post("http://10.0.3.98:9000/api/cars/sellcar", values);
+                await axios.post("http://10.0.3.98:9000/api/cars/sellcar", values,{withCredentials: true});
                 navigate("/");
             } catch (error) {
                 toast.error(error.response.data)

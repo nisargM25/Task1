@@ -1,0 +1,49 @@
+body {
+    background-color: #110f16;
+    font-family: "Baloo 2", cursive;
+    font-size: 16px;
+    color: #ffffff;
+    text-rendering: optimizeLegibility;
+    font-weight: initial;
+}
+
+.dark {
+    background: #110f16;
+}
+body {
+    background-color: #000;
+}
+.card {
+    border-radius: 10px;
+    border: none;
+}
+.product {
+    background-color: #eee;
+}
+
+.act-price {
+    color: red;
+    font-weight: 700;
+}
+.dis-price {
+    text-decoration: line-through;
+}
+.about {
+    font-size: 20px;
+}
+
+.container .row {
+    color: #000;
+}
+.d-flex {
+    flex-direction: row;
+    align-content: center;
+}
+.container300 {
+    // height: ;
+    width: 100%;
+}
+.main-image{
+    background-color: #000;
+    // width: 100%!important;
+}

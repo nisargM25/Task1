@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import "./CarsForSale.scss"
+import "./Cars.scss"
 
 const CarsForSale = () => {
     const [cars, setCars] = useState([]);
@@ -28,11 +28,10 @@ const CarsForSale = () => {
                     {
                         cars.length > 0 ? (
                             cars.map(car => (
-
                                 <article className="postcard dark blue" key={car.id}>
                                     < img className="postcard__img" src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="ImageTitle" />
                                     <div className="postcard__text">
-                                        <h1 className="postcard__title blue"><Link to="/">{car.make} {car.model}</Link></h1>
+                                        <h1 className="postcard__title blue"><Link to={`/car/${car.id}`}>{car.make} {car.model}</Link></h1>
                                         <div className="postcard__subtitle small">
                                             <div>
                                                 {car.dateOfManufacturing.substring(0, 10)}

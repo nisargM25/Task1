@@ -1,9 +1,11 @@
 import express from 'express';
-import { getAllCars, sellCar } from '../controllers/product.js';
+import { deleteCar, getAllCars, getSingleCar, sellCar } from '../controllers/product.js';
 
 const router=express.Router();
 
 router.get("/",getAllCars);
+router.get("/:id",getSingleCar);
 router.post("/sellcar",sellCar);
+router.delete("/:id",deleteCar);
 
 export default router

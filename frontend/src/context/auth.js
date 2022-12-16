@@ -17,7 +17,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
     const logout = async (inputs) => {
-        await axios.post("http://10.0.3.98:9000/api/auth/logout",{ method: 'POST', credentials: 'same-origin' });
+        await axios.post("http://10.0.3.98:9000/api/auth/logout",{withCredentials: true});
         setCurrentUser(null)
     }
     return <AuthContext.Provider value={{currentUser,login,logout}}>{children}</AuthContext.Provider>
