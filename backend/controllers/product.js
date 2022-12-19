@@ -2,15 +2,25 @@ import { db } from '../db.js';
 import jwt from 'jsonwebtoken';
 
 export const getAllCars = (req, res) => {
-    const q = "Select * from vehicle";
+    const q = "Select * from vehicle order by id desc";
     db.query(q, (err, data) => {
         if (err) return res.send(err)
         return res.status(200).json(data);
     })
 }
+export const getAllCarsByUser = (req, res) => {
+    const id = req.params.id;
+    
+    const q = "Select * from vehicle where seller_id=? order by id desc";
+    db.query(q, [id], (err, data) => {
+        if (err) return res.send(err)
+        return res.status(200).json(data);
+    })
+}
+
 export const deleteCar = (req, res) => {
     const id = req.params.id;
-    console.log(id);
+    
     const q = "delete from vehicle where id=?";
     db.query(q, [id], (err, data) => {
         if (err) return res.send(err)
@@ -28,7 +38,27 @@ export const getSingleCar = (req, res) => {
     })
 }
 
+//Update Car
+export const updateCar = (req, res) => {
+    const id = req.params.id;
+    const q = "Update vehicle set make=?,model=?,registrationNumber=?,dateOfManufacturing=?,miles=?,images=?,sellingPriceRange=? where id=?";
+    const values = [
+        req.body.make,
+        req.body.model,
+        req.body.regNo,
+        req.body.date,
+        req.body.miles,
+        req.body.images,
+        req.body.price
+    ]
+    db.query(q, [...values, id], (err, data) => {
+        if (err) return res.send(err)
+        console.log("Updated")
+        return res.status(200).json(data);
+    })
+}
 
+//Adding Car to Table
 export const sellCar = (req, res) => {
     const token = req.cookies.access_token;
     console.log(req.cookies.access_token)

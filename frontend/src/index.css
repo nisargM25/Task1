@@ -85,3 +85,19 @@ margin: auto !important;
 {
   color: rgba(0, 0, 0, 0.9) !important;
 }
+.UpdateImg {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.UpdateImg span{
+  width: 140px;
+  height: 140px;
+}
+.UpdateImg>span> img{
+ display: inline;
+ height: 140px;
+ object-fit: contain;
+}

@@ -10,6 +10,7 @@ import { AuthContext } from "./context/auth.js";
 import Navbar from "./component/Navbar";
 import SellCar from "./component/SellCar";
 import SingleProduct from "./pages/SingleProduct";
+import UpdateCar from "./component/UpdateCar";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -22,6 +23,7 @@ function App() {
         <Route path='/profile' element={currentUser ? <Profile /> :<Navigate replace to="/" /> } />
         <Route path='/sellcar' element={currentUser ? <SellCar />:<Navigate replace to="/" />} />
         <Route path='/car/:id' element={currentUser ? <SingleProduct />:<Navigate replace to="/" />} />
+        <Route path='/updateCar/:id' element={currentUser ? <UpdateCar />:<Navigate replace to="/" />} />
         <Route path="*" element={<Navigate replace to="/" />} />
         {/* <Route path='*' element={!currentUser ? <Login /> : <Profile />}/> */}
       </Routes>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,20 +7,24 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../context/auth';
 import { sellCarValidation } from '../schemas';
 
-const SellCar = () => {
+const UpdateCar = () => {
+    const state = useLocation().state;
+
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
+// console.log(state)
 
     const initialValues = {
-        make: "",
-        model: "",
-        regNo: "",
-        date: "",
-        miles: "",
-        images: "",
-        price: "",
+        make: state?.make,
+        model: state?.model,
+        regNo: state?.registrationNumber,
+        date: state?.dateOfManufacturing.substring(0, 10),
+        miles: state?.miles,
+        images: state?.images.split(","),
+        price: state?.sellingPriceRange,
         sid: currentUser.id,
     }
+
 
     const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } = useFormik({
         initialValues,
@@ -41,12 +45,12 @@ const SellCar = () => {
                 }
             }
             const imgUrl = await upload();
-            values.images = imgUrl;
+            values.images = imgUrl ?   imgUrl:state.images.split(",");
             console.log(values.images)
             // alert(values.images);
 
             try {
-                await axios.post("http://10.0.3.98:9000/api/cars/sellcar", values, { withCredentials: true })
+                await axios.put(`http://10.0.3.98:9000/api/cars/update/${state.id}`, values, { withCredentials: true });
                 navigate("/");
             } catch (error) {
                 toast.error(error.response.data)
@@ -59,10 +63,10 @@ const SellCar = () => {
         <div className='App'>
             <div className="container">
                 <div className="RowMain row">
-                    <div className="col-md-5 m-auto offset-md-3">
+                    <div className="col-md-6 m-auto offset-md-3">
                         <div className="card">
                             <form className="card-body cardbody-color p-lg-5" encType="multipart/form-data" onSubmit={handleSubmit}>
-                                <h1 className="text-center text-dark mb-1">Car Details</h1>
+                                <h1 className="text-center text-dark mb-1">Update Car Details</h1>
                                 <div className="my-3">
                                     <input type="text" value={values.make} onChange={handleChange} onBlur={handleBlur} className="form-control" name="make" id="Make" placeholder="Car Make" />
                                     {errors.make && touched.make ? <p className='form-error'>{errors.make}</p> : null}
@@ -85,15 +89,21 @@ const SellCar = () => {
                                     {errors.miles && touched.miles ? <p className='form-error'>{errors.miles}</p> : null}
                                 </div>
                                 <div className="my-3">
-                                    <input type="file" accept='image/*' multiple onChange={(e) => setFieldValue("images", e.currentTarget.files)} onBlur={handleBlur} className="form-control" name="images" id="Images" />
+                                    <input type="file" accept='image/*' multiple onChange={(e) => {setFieldValue("images", e.currentTarget.files)}} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.images && touched.images ? <p className='form-error'>{errors.images}</p> : null}
+                                    <div className='UpdateImg' >
+                                        {Array.from(values.images).map((e) => (<span key={e}>
+                                            {< img src = {`../upload/${e}`} alt="cars" width={"100%"} />}
+                                        </span>
+                                        ))}
+                                    </div>
                                 </div>
                                 <div className="my-3">
                                     <input type="text" value={values.price} onChange={(handleChange)} onBlur={handleBlur} className="form-control" name="price" id="Price" placeholder="Price Range" />
                                     {errors.price && touched.price ? <p className='form-error'>{errors.price}</p> : null}
                                 </div>
                                 <div className="text-center">
-                                    {(<button type="submit" className="btn btn-outline-dark px-1 mb-2 w-50" >Sell</button>)}
+                                    {<button type="submit" className="btn btn-outline-dark px-1 mb-2 w-50" >Update</button>}
                                 </div>
 
                             </form>
@@ -106,4 +116,4 @@ const SellCar = () => {
     )
 }
 
-export default SellCar
+export default UpdateCar
