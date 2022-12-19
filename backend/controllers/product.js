@@ -38,7 +38,6 @@ export const getSingleCar = (req, res) => {
     })
 }
 
-//Update Car
 export const updateCar = (req, res) => {
     const id = req.params.id;
     const q = "Update vehicle set make=?,model=?,registrationNumber=?,dateOfManufacturing=?,miles=?,images=?,sellingPriceRange=? where id=?";

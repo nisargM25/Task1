@@ -51,6 +51,7 @@ const UpdateCar = () => {
 
             try {
                 await axios.put(`http://10.0.3.98:9000/api/cars/update/${state.id}`, values, { withCredentials: true });
+                toast.success("Successfully Updated");
                 navigate("/");
             } catch (error) {
                 toast.error(error.response.data)

@@ -26,7 +26,6 @@ const SellCar = () => {
         initialValues,
         validationSchema: sellCarValidation,
         onSubmit: async (values) => {
-            // console.log(values.images[0])
             const upload = async () => {
                 try {
                     const formData = new FormData();
