@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 import './SingleProduct.scss'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const SingleProduct = () => {
     const { currentUser } = useContext(AuthContext);
@@ -13,7 +15,7 @@ const SingleProduct = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get(`http://10.0.3.98:9000/api/cars/${id}`);
+                const res = await axios.get(`http://10.0.3.98:9000/api/cars/${id}`,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
                 setCar(res.data);
             }
             catch (err) {
@@ -21,29 +23,42 @@ const SingleProduct = () => {
             }
         }
         fetchProducts()
-    }, [id])
+    }, [currentUser.accessToken,id])
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://10.0.3.98:9000/api/cars/${id}`);
+            await axios.delete(`http://10.0.3.98:9000/api/cars/${id}`,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
             navigate("/")
         } catch (err) {
             console.log(err);
         }
     }
+    
     return (
         <div className='Dark d-flex' style={{ height: "calc(100vh - 56px)" }}>
             <div className="container  my-auto mx-auto">
                 <div className="row  justify-content-center">
-                    <div className="col-md-6">
+                    <div className="col-md-5 p-5">
                         <div className="card">
                             {car.map(scar => (
-
                                 <div className="row" key={scar.id}>
                                     <div className="col-md-12">
-                                        <div className="p-1">
-                                            <div className="text-center p-3">
-                                                <img id="" className='m-auto container300' src={`../upload/${scar.images.split(",").splice(0, 1)}`} alt='main' />
+                                        <div className="p-1 container300">
+                                            {/* <div className="text-center p-3 container300">
+                                                <img id="expandedImg" className='m-auto ' src={`../upload/${scar.images.split(",").splice(0, 1)}`} alt='main' />
                                             </div>
+                                            <hr /> */}
+                                            <Carousel infiniteLoop={true} showIndicators={false} showStatus={false} swipeable={true} showThumbs={false} showArrows={true} stopOnHover={true}>
+                                            {Array.from(scar.images.split(",")).map((e) => (<div key={e}>
+                                                    {< img className='container300img' src={`../upload/${e}`} alt="cars"/>}
+                                                </div>
+                                                ))}
+                                            </Carousel>
+                                            {/* <div className='UpdateImg justify-content-center' >
+                                                {Array.from(scar.images.split(",")).map((e) => (<span key={e}>
+                                                    {< img className='img-thumbnail' src={`../upload/${e}`} alt="cars" width={"100%"} onClick={myFunction(this)} />}
+                                                </span>
+                                                ))}
+                                            </div> */}
                                             {/* <div className="thumbnail text-center"> <img onClick={change_image(this)} alt='sec' src="https://i.imgur.com/Rx7uKd0.jpg" width="70" /> <img onClick={change_image(this)} src="https://i.imgur.com/Dhebu4F.jpg" alt='sec' width="70" /> </div> */}
                                         </div>
                                     </div>
@@ -75,12 +90,6 @@ const SingleProduct = () => {
         </div >
     )
 }
-// function change_image(image) {
-//     image.src="https://i.imgur.com/Dhebu4F.jpg";
-//     let container = document.getElementById("main-image");
-//     container.src = image.src;
-// }
-// document.addEventListener("DOMContentLoaded", function (event) {
-// });
+
 
 export default SingleProduct

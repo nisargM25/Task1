@@ -8,9 +8,10 @@ export const getAllCars = (req, res) => {
         return res.status(200).json(data);
     })
 }
+
 export const getAllCarsByUser = (req, res) => {
     const id = req.params.id;
-    
+
     const q = "Select * from vehicle where seller_id=? order by id desc";
     db.query(q, [id], (err, data) => {
         if (err) return res.send(err)
@@ -20,14 +21,12 @@ export const getAllCarsByUser = (req, res) => {
 
 export const deleteCar = (req, res) => {
     const id = req.params.id;
-    
     const q = "delete from vehicle where id=?";
     db.query(q, [id], (err, data) => {
         if (err) return res.send(err)
         return res.status(200).json(data);
     })
 }
-
 
 export const getSingleCar = (req, res) => {
     const id = req.params.id;
@@ -40,6 +39,7 @@ export const getSingleCar = (req, res) => {
 
 export const updateCar = (req, res) => {
     const id = req.params.id;
+    console.log("Update")
     const q = "Update vehicle set make=?,model=?,registrationNumber=?,dateOfManufacturing=?,miles=?,images=?,sellingPriceRange=? where id=?";
     const values = [
         req.body.make,
@@ -51,7 +51,10 @@ export const updateCar = (req, res) => {
         req.body.price
     ]
     db.query(q, [...values, id], (err, data) => {
-        if (err) return res.send(err)
+        if (err) {
+            console.log(err)
+            return res.send(err)
+        }
         console.log("Updated")
         return res.status(200).json(data);
     })
@@ -62,14 +65,15 @@ export const sellCar = (req, res) => {
     const token = req.cookies.access_token;
     console.log(req.cookies.access_token)
     if (!token) return res.status(401).json("Not authenticated!");
-
-    jwt.verify(token, "jwtkeyClient", (err, userInfo) => {
+    jwt.verify(token, "AuthJwt", (err, userInfo) => {
         if (err) return res.status(403).json("Token is not valid!");
         const p = "Select * from vehicle where registrationNumber=?";
         db.query(p, [req.body.regNo], (err, data) => {
-            if (err) return res.json(err);
+            if (err) {
+                console.log(err)
+                return res.status(500).json(err)
+            }
             if (data.length) return res.status(409).json("Registration Plate/License Number already Exist");
-
             const q = "INSERT INTO `vehicle` (`make`, `model`,`registrationNumber` ,`dateOfManufacturing`, `miles`, `images`, `sellingPriceRange`, `seller_id`) VALUES (?)";
             const values = [
                 req.body.make,
@@ -83,7 +87,10 @@ export const sellCar = (req, res) => {
             ]
             // console.log(values)
             db.query(q, [values], (err, data) => {
-                if (err) return res.status(500).json(err)
+                if (err) {
+                    console.log(err)
+                    return res.status(500).json(err)
+                }
                 return res.status(200).json("Car Added")
             })
 

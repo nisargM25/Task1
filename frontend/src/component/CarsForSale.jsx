@@ -1,14 +1,16 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/auth';
 import "./Cars.scss"
 
 const CarsForSale = () => {
+    const { currentUser } = useContext(AuthContext);
     const [cars, setCars] = useState([]);
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get(`http://10.0.3.98:9000/api/cars/`);
+                const res = await axios.get(`http://10.0.3.98:9000/api/cars/`,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
                 setCars(res.data);
             }
             catch (err) {
@@ -16,7 +18,7 @@ const CarsForSale = () => {
             }
         }
         fetchProducts()
-    }, [])
+    }, [currentUser])
     // console.log(cars)
 
     return (

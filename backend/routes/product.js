@@ -1,13 +1,38 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { deleteCar, getAllCars, getAllCarsByUser, getSingleCar, sellCar,updateCar } from '../controllers/product.js';
 
 const router=express.Router();
 
-router.get("/",getAllCars);
-router.get("/user/:id",getAllCarsByUser);
-router.get("/:id",getSingleCar);
-router.post("/sellcar",sellCar);
-router.put("/update/:id",updateCar);
-router.delete("/:id",deleteCar);
+const verify=(req,res,next)=>{
+    const authHeader=req.headers.authorization;
+    console.log(authHeader)
+    if(authHeader){
+        const token=authHeader.split(" ")[1]
+        console.log(token)
+        jwt.verify(token,"AuthJwt",(err,user)=>{
+            if(err){
+                return res.status(403).json("Token is not valid")
+            }
+            console.log(user)
+            console.log(req.user)
+            req.user=user;
+            next()
+        }) 
+    }
+    else{
+        res.status(401).json("Access Forbidden")
+    }
+}
+
+router.get("/",verify,getAllCars);
+router.get("/user/:id",verify,getAllCarsByUser);
+router.get("/:id",verify,getSingleCar);
+router.post("/sellcar",verify,sellCar);
+router.put("/update/:id",verify,updateCar);
+router.delete("/:id",verify,deleteCar);
+
+
+
 
 export default router

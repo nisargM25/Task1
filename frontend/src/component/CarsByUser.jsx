@@ -10,7 +10,7 @@ const CarsByUser = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get(`http://10.0.3.98:9000/api/cars/user/${currentUser.id}`);
+                const res = await axios.get(`http://10.0.3.98:9000/api/cars/user/${currentUser.id}`,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
                 setCars(res.data);
             }
             catch (err) {
@@ -18,7 +18,7 @@ const CarsByUser = () => {
             }
         }
         fetchProducts()
-    }, [currentUser.id])
+    }, [currentUser])
 
     // console.log(cars)
 

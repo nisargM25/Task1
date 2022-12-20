@@ -11,6 +11,7 @@ import Navbar from "./component/Navbar";
 import SellCar from "./component/SellCar";
 import SingleProduct from "./pages/SingleProduct";
 import UpdateCar from "./component/UpdateCar";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -18,7 +19,7 @@ function App() {
     <div className="AppMain">
       {currentUser && <Navbar />}
       <Routes>
-        <Route path='/register' element={!currentUser&&<Register />} />
+        <Route path='/register' element={!currentUser?<Register />:<Navigate replace to="/" />} />
         <Route path='/' element={!currentUser ? <Login /> : <Home />} />
         <Route path='/profile' element={currentUser ? <Profile /> :<Navigate replace to="/" /> } />
         <Route path='/sellcar' element={currentUser ? <SellCar />:<Navigate replace to="/" />} />
@@ -27,6 +28,7 @@ function App() {
         <Route path="*" element={<Navigate replace to="/" />} />
         {/* <Route path='*' element={!currentUser ? <Login /> : <Profile />}/> */}
       </Routes>
+      <ToastContainer position="top-right" autoClose={6000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
     </div>
   );
 }

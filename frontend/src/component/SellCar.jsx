@@ -45,7 +45,8 @@ const SellCar = () => {
             // alert(values.images);
 
             try {
-                await axios.post("http://10.0.3.98:9000/api/cars/sellcar", values, { withCredentials: true })
+                await axios.post("http://10.0.3.98:9000/api/cars/sellcar", values,{headers:{authorization:`Bearer ${currentUser.accessToken}`}})
+                toast.success("Successfully Added");
                 navigate("/");
             } catch (error) {
                 toast.error(error.response.data)

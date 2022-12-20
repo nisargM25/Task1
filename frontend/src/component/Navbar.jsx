@@ -4,7 +4,11 @@ import { AuthContext } from "../context/auth";
 
 
 const Navbar = () => {
-    const { currentUser, logout } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext); 
+    const logout=()=>{
+        localStorage.clear();
+        window.location.reload()
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">

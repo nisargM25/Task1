@@ -45,12 +45,12 @@ const UpdateCar = () => {
                 }
             }
             const imgUrl = await upload();
-            values.images = imgUrl ?   imgUrl:state.images.split(",");
+            values.images = imgUrl ?   imgUrl:state.images;
             console.log(values.images)
             // alert(values.images);
 
             try {
-                await axios.put(`http://10.0.3.98:9000/api/cars/update/${state.id}`, values, { withCredentials: true });
+                await axios.put(`http://10.0.3.98:9000/api/cars/update/${state.id}`, values,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
                 toast.success("Successfully Updated");
                 navigate("/");
             } catch (error) {
@@ -93,6 +93,7 @@ const UpdateCar = () => {
                                     <input type="file" accept='image/*' multiple onChange={(e) => {setFieldValue("images", e.currentTarget.files)}} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.images && touched.images ? <p className='form-error'>{errors.images}</p> : null}
                                     <div className='UpdateImg' >
+                                        
                                         {Array.from(values.images).map((e) => (<span key={e}>
                                             {< img src = {`../upload/${e}`} alt="cars" width={"100%"} />}
                                         </span>
