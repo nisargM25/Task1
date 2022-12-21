@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 import "./Cars.scss"
 
+
 const CarsByUser = () => {
     const { currentUser } = useContext(AuthContext);
     const [cars, setCars] = useState([]);
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get(`http://10.0.3.98:9000/api/cars/user/${currentUser.id}`,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
+                const res = await axios.get(`http://10.0.3.98:9000/api/cars/user/${currentUser.id}`, { headers: { authorization: `Bearer ${currentUser.accessToken}` } });
                 setCars(res.data);
             }
             catch (err) {
@@ -24,7 +25,6 @@ const CarsByUser = () => {
 
     return (
         <div className='dark'>
-
             <section className="dark">
                 <div className="container py-4">
                     <h1 className="h1 text-center" id="pageHeaderTitle">Cars</h1>

@@ -24,6 +24,8 @@ const verify=(req,res,next)=>{
 }
 
 router.get("/",getAllCars);
+router.get("/detail/:id",getSingleCar);
+
 router.get("/user/:id",verify,getAllCarsByUser);
 router.get("/:id",verify,getSingleCar);
 router.post("/sellcar",verify,sellCar);

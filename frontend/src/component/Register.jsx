@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { signUpSchema } from '../schemas';
 
 
+
 const Register = () => {
     const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const Register = () => {
         onSubmit: async (values, action) => {
             try {
                 await axios.post("http://10.0.3.98:9000/api/auth/register", values);
-                navigate("/");
+                navigate("/login");
             } catch (error) {
                 toast.error(error.response.data)
             }
@@ -69,7 +70,7 @@ const Register = () => {
                                 </div>
                                 <div className="text-center">
                                     <p className="para">
-                                        Already have an account? <Link to='/'>Login</Link>
+                                        Already have an account? <Link to='/login'>Login</Link>
                                     </p>
                                 </div>
                             </form>

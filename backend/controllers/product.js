@@ -11,7 +11,6 @@ export const getAllCars = (req, res) => {
 
 export const getAllCarsByUser = (req, res) => {
     const id = req.params.id;
-
     const q = "Select * from vehicle where seller_id=? order by id desc";
     db.query(q, [id], (err, data) => {
         if (err) return res.send(err)

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
-import "./Cars.scss"
+import "./Cars.scss";
 
 const CarsForSale = () => {
     const { currentUser } = useContext(AuthContext);
@@ -10,7 +10,7 @@ const CarsForSale = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get(`http://10.0.3.98:9000/api/cars/`,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
+                const res = await axios.get(`http://10.0.3.98:9000/api/cars/`);
                 setCars(res.data);
             }
             catch (err) {
@@ -23,7 +23,6 @@ const CarsForSale = () => {
 
     return (
         <div className='dark'>
-
             <section className="dark">
                 <div className="container py-4">
                     <h1 className="h1 text-center" id="pageHeaderTitle">Cars</h1>
@@ -33,7 +32,7 @@ const CarsForSale = () => {
                                 <article className="postcard dark blue" key={car.id}>
                                     < img className="postcard__img" src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="ImageTitle" />
                                     <div className="postcard__text">
-                                        <h1 className="postcard__title blue"><Link to={`/car/${car.id}`}>{car.make} {car.model}</Link></h1>
+                                        <h1 className="postcard__title blue"><Link to={`/carDetail/${car.id}`}>{car.make} {car.model}</Link></h1>
                                         <div className="postcard__subtitle small">
                                             <div>
                                                 {car.dateOfManufacturing.substring(0, 10)}

@@ -7,20 +7,24 @@ import Login from "./component/Login";
 import Profile from "./component/Profile";
 import { useContext } from "react";
 import { AuthContext } from "./context/auth.js";
-import Navbar from "./component/Navbar";
+
 import SellCar from "./component/SellCar";
 import SingleProduct from "./pages/SingleProduct";
 import UpdateCar from "./component/UpdateCar";
 import { ToastContainer } from "react-toastify";
+import Navbar from "./component/Navbar";
+import Detail from "./pages/Detail";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
   return (
     <div className="AppMain">
-      {currentUser && <Navbar />}
+      <Navbar />
       <Routes>
+        <Route path='/' element={ <Home />} />
+        <Route path='/carDetail/:id' element={ <Detail />} />
         <Route path='/register' element={!currentUser?<Register />:<Navigate replace to="/" />} />
-        <Route path='/' element={!currentUser ? <Login /> : <Home />} />
+        <Route path='/login' element={!currentUser ? <Login /> : <Home />} />
         <Route path='/profile' element={currentUser ? <Profile /> :<Navigate replace to="/" /> } />
         <Route path='/sellcar' element={currentUser ? <SellCar />:<Navigate replace to="/" />} />
         <Route path='/car/:id' element={currentUser ? <SingleProduct />:<Navigate replace to="/" />} />

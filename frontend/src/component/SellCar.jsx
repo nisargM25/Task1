@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../context/auth';
 import { sellCarValidation } from '../schemas';
 
+
 const SellCar = () => {
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
