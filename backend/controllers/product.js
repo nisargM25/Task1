@@ -62,11 +62,7 @@ export const updateCar = (req, res) => {
 
 //Adding Car to Table
 export const sellCar = (req, res) => {
-    const token = req.cookies.access_token;
-    console.log(req.cookies.access_token)
-    if (!token) return res.status(401).json("Not authenticated!");
-    jwt.verify(token, "AuthJwt", (err, userInfo) => {
-        if (err) return res.status(403).json("Token is not valid!");
+    
         const p = "Select * from vehicle where registrationNumber=?";
         db.query(p, [req.body.regNo], (err, data) => {
             if (err) {
@@ -95,5 +91,5 @@ export const sellCar = (req, res) => {
             })
 
         })
-    })
+    
 }

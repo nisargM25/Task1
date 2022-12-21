@@ -14,8 +14,6 @@ const verify=(req,res,next)=>{
             if(err){
                 return res.status(403).json("Token is not valid")
             }
-            console.log(user)
-            console.log(req.user)
             req.user=user;
             next()
         }) 
@@ -25,7 +23,7 @@ const verify=(req,res,next)=>{
     }
 }
 
-router.get("/",verify,getAllCars);
+router.get("/",getAllCars);
 router.get("/user/:id",verify,getAllCarsByUser);
 router.get("/:id",verify,getSingleCar);
 router.post("/sellcar",verify,sellCar);

@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../context/auth';
-import { sellCarValidation } from '../schemas';
+import { updateCarValidation,sellCarValidation } from '../schemas';
 
 const UpdateCar = () => {
     const state = useLocation().state;
-
+    const [img, setImg] = useState(state.images.split(","))
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
-// console.log(state)
+    // console.log(state)
 
     const initialValues = {
         make: state?.make,
@@ -25,10 +25,9 @@ const UpdateCar = () => {
         sid: currentUser.id,
     }
 
-
     const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } = useFormik({
         initialValues,
-        validationSchema: sellCarValidation,
+        validationSchema: img.length>0? updateCarValidation:sellCarValidation,
         onSubmit: async (values) => {
             // console.log(values.images[0])
             const upload = async () => {
@@ -45,12 +44,19 @@ const UpdateCar = () => {
                 }
             }
             const imgUrl = await upload();
-            values.images = imgUrl ?   imgUrl:state.images;
-            console.log(values.images)
-            // alert(values.images);
+            let allImg = "";
+            // console.log(img.length)
+            for (let index = 0; index < img.length; index++) {
+                let imgM = img[index];
+                allImg === "" ? allImg = imgM : allImg += "," + imgM;
+            }
+            // console.log(allImg)    
+
+            values.images = imgUrl ? imgUrl : allImg;
+            
 
             try {
-                await axios.put(`http://10.0.3.98:9000/api/cars/update/${state.id}`, values,{headers:{authorization:`Bearer ${currentUser.accessToken}`}});
+                await axios.put(`http://10.0.3.98:9000/api/cars/update/${state.id}`, values, { headers: { authorization: `Bearer ${currentUser.accessToken}` } });
                 toast.success("Successfully Updated");
                 navigate("/");
             } catch (error) {
@@ -60,6 +66,17 @@ const UpdateCar = () => {
             // action.resetForm();
         },
     });
+    // console.log(JSON.stringify(img.split('"["')))
+    const removeImage = (id) => {
+        //images are inserted correctly cannot delete 
+        setImg((oldState) => oldState.filter((item) => item !== id));
+        
+    }
+
+    useEffect(() => {
+        setImg(img);
+    }, [img])
+
     return (
         <div className='App'>
             <div className="container">
@@ -90,12 +107,12 @@ const UpdateCar = () => {
                                     {errors.miles && touched.miles ? <p className='form-error'>{errors.miles}</p> : null}
                                 </div>
                                 <div className="my-3">
-                                    <input type="file" accept='image/*' multiple onChange={(e) => {setFieldValue("images", e.currentTarget.files)}} onBlur={handleBlur} className="form-control" name="images" id="Images" />
+                                    <input type="file" accept='image/*' multiple onChange={(e) => { setFieldValue("images", e.currentTarget.files) }} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.images && touched.images ? <p className='form-error'>{errors.images}</p> : null}
                                     <div className='UpdateImg' >
-                                        
-                                        {Array.from(values.images).map((e) => (<span key={e}>
-                                            {< img src = {`../upload/${e}`} alt="cars" width={"100%"} />}
+                                        {Array.from(img).map((e) => (<span key={e}>
+                                            {< img onClick={() => removeImage(e)} src={`../upload/${e}`} alt="cars" width={"100%"} />}
+                                            {/* {console.log(values.images)} */}
                                         </span>
                                         ))}
                                     </div>
