@@ -1,4 +1,5 @@
 import Home from "./pages/Home";
+import HomeU from "./pages/HomeU";
 import './index.css'
 import './global.scss'
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -21,8 +22,9 @@ function App() {
     <div className="AppMain">
       <Navbar />
       <Routes>
-        <Route path='/' element={ <Home />} />
+        <Route path='/' element={currentUser? <HomeU />:<Home />} />
         <Route path='/carDetail/:id' element={ <Detail />} />
+        {/* <Route path='/user' element={currentUser? <HomeU />:<Navigate replace to="/" />} /> */}
         <Route path='/register' element={!currentUser?<Register />:<Navigate replace to="/" />} />
         <Route path='/login' element={!currentUser ? <Login /> : <Home />} />
         <Route path='/profile' element={currentUser ? <Profile /> :<Navigate replace to="/" /> } />

@@ -11,7 +11,7 @@ const Navbar = () => {
     }
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg  navbar-light bg-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to='/'>
                         <img className="img-fluid mx-2 navbarBrand" src="https://www.autodap.parts/img/logo-top.svg" alt="" />
@@ -29,6 +29,9 @@ const Navbar = () => {
                             </li>
                             {currentUser && <li className="nav-item ">
                                 <Link className="nav-link" to='/sellcar'>Sell Car</Link>
+                            </li>}
+                            {currentUser && <li className="nav-item ">
+                                <Link className="nav-link" to='/' state={currentUser.id}>My Car</Link>
                             </li>}
 
                         </ul>

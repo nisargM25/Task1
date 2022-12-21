@@ -1,5 +1,5 @@
 import { db } from '../db.js';
-import jwt from 'jsonwebtoken';
+
 
 export const getAllCars = (req, res) => {
     const q = "Select * from vehicle order by id desc";
@@ -12,6 +12,14 @@ export const getAllCars = (req, res) => {
 export const getAllCarsByUser = (req, res) => {
     const id = req.params.id;
     const q = "Select * from vehicle where seller_id=? order by id desc";
+    db.query(q, [id], (err, data) => {
+        if (err) return res.send(err)
+        return res.status(200).json(data);
+    })
+}
+export const getAllCarsNotByUser = (req, res) => {
+    const id = req.params.id;
+    const q = "Select * from vehicle where seller_id!=? order by id desc";
     db.query(q, [id], (err, data) => {
         if (err) return res.send(err)
         return res.status(200).json(data);

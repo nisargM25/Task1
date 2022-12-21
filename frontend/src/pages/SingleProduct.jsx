@@ -34,7 +34,7 @@ const SingleProduct = () => {
     }
     
     return (
-        <div className='Dark d-flex' style={{ height: "calc(100vh - 56px)" }}>
+        <div className='Dark d-flex' style={{ height: "100vh" }}>
             <div className="container  my-auto mx-auto">
                 <div className="row  justify-content-center">
                     <div className="col-md-5 p-5">
@@ -66,7 +66,7 @@ const SingleProduct = () => {
                                     <div className="col-md-12 text-center">
                                         <div className="product p-5">
                                             <div className="d-flex justify-content-between align-items-center">
-                                                <div className="d-flex align-items-center"> <i className="fa fa-long-arrow-left"></i>  </div> <i className="fa fa-shopping-cart text-muted"></i>
+                                                <div className="d-flex align-items-center">  </div> 
                                             </div>
                                             <div className="about mt-3 mb-2">
                                                 <h2 className="text-uppercase"><strong>{scar.make} {scar.model}</strong></h2>
@@ -76,7 +76,7 @@ const SingleProduct = () => {
                                             <p className="about">Miles Covered: {scar.miles}</p>
                                             <p className="about">Price Range: {scar.sellingPriceRange}</p>
                                             {currentUser.id === scar.seller_id && <div className="cart mt-3 align-items-center">
-                                                <Link to={`/updateCar/${scar.id}`} state={scar}><button className="btn btn-dark text-uppercase mx-2 px-4">Update</button></Link>
+                                                <Link to={`/updateCar/${scar.id}`} state={scar}><button className="btn btn-dark text-uppercase m-2 px-4">Update</button></Link>
                                                 <button className="btn btn-danger text-uppercase mx-2 px-4" onClick={handleDelete}>Delete</button>
                                             </div>}
                                         </div>

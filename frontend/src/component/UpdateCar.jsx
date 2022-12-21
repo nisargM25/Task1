@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../context/auth';
-import { updateCarValidation,sellCarValidation } from '../schemas';
+import { updateCarValidation, sellCarValidation } from '../schemas';
 
 const UpdateCar = () => {
     const state = useLocation().state;
@@ -27,7 +27,7 @@ const UpdateCar = () => {
 
     const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } = useFormik({
         initialValues,
-        validationSchema: img.length>0? updateCarValidation:sellCarValidation,
+        validationSchema: img.length > 0 ? updateCarValidation : sellCarValidation,
         onSubmit: async (values) => {
             // console.log(values.images[0])
             const upload = async () => {
@@ -53,7 +53,7 @@ const UpdateCar = () => {
             // console.log(allImg)    
 
             values.images = imgUrl ? imgUrl : allImg;
-            
+
 
             try {
                 await axios.put(`http://10.0.3.98:9000/api/cars/update/${state.id}`, values, { headers: { authorization: `Bearer ${currentUser.accessToken}` } });
@@ -63,14 +63,14 @@ const UpdateCar = () => {
                 toast.error(error.response.data)
             }
 
-            // action.resetForm();
+
         },
     });
-    // console.log(JSON.stringify(img.split('"["')))
-    const removeImage = (id) => {
+
+    const removeImage = (e) => {
         //images are inserted correctly cannot delete 
-        setImg((oldState) => oldState.filter((item) => item !== id));
-        
+        setImg((ProductImg) => ProductImg.filter((item) => item !== e));
+
     }
 
     useEffect(() => {
@@ -83,7 +83,7 @@ const UpdateCar = () => {
                 <div className="RowMain row">
                     <div className="col-md-6 m-auto offset-md-3">
                         <div className="card">
-                            <form className="card-body cardbody-color p-lg-5" encType="multipart/form-data" onSubmit={handleSubmit}>
+                            <form className="card-body cardbody-color p-lg-4" encType="multipart/form-data" onSubmit={handleSubmit}>
                                 <h1 className="text-center text-dark mb-1">Update Car Details</h1>
                                 <div className="my-3">
                                     <input type="text" value={values.make} onChange={handleChange} onBlur={handleBlur} className="form-control" name="make" id="Make" placeholder="Car Make" />
@@ -110,10 +110,12 @@ const UpdateCar = () => {
                                     <input type="file" accept='image/*' multiple onChange={(e) => { setFieldValue("images", e.currentTarget.files) }} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.images && touched.images ? <p className='form-error'>{errors.images}</p> : null}
                                     <div className='UpdateImg' >
-                                        {Array.from(img).map((e) => (<span key={e}>
-                                            {< img onClick={() => removeImage(e)} src={`../upload/${e}`} alt="cars" width={"100%"} />}
-                                            {/* {console.log(values.images)} */}
-                                        </span>
+                                        {Array.from(img).map((e) => (<div key={e}>
+                                            <div className="containerX">
+                                                {< img src={`../upload/${e}`} alt="cars" width={"100%"} />}
+                                                <button className='btnX btn btn-outline-dark' onClick={() => removeImage(e)}><i className="fa fa-close"></i> Remove</button>
+                                            </div>
+                                        </div>
                                         ))}
                                     </div>
                                 </div>
