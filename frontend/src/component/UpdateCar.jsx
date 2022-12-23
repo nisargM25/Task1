@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../global.scss';
 import { AuthContext } from '../context/auth';
 import { updateCarValidation, sellCarValidation } from '../schemas';
 
@@ -110,13 +111,13 @@ const UpdateCar = () => {
                                     <input type="file" accept='image/*' multiple onChange={(e) => { setFieldValue("images", e.currentTarget.files) }} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.images && touched.images ? <p className='form-error'>{errors.images}</p> : null}
                                     <div className='UpdateImg' >
-                                        {Array.from(img).map((e) => (<div key={e}>
+                                        {img.length > 0 ? Array.from(img).map((e) => (<div key={e}>
                                             <div className="containerX">
                                                 {< img src={`../upload/${e}`} alt="cars" width={"100%"} />}
                                                 <button className='btnX btn btn-outline-dark' onClick={() => removeImage(e)}><i className="fa fa-close"></i> Remove</button>
                                             </div>
                                         </div>
-                                        ))}
+                                        )):(<div className="containerX"><label htmlFor="Images" className='CursorType'>Upload Image</label></div>)}
                                     </div>
                                 </div>
                                 <div className="my-3">

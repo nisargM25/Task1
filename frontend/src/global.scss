@@ -7,3 +7,22 @@ body{
       display: none;
   }
 }
+.dark {
+  background: #110f16;
+}
+.UpdateImg {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 5px;
+  height: 150px;
+  overflow: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    &::-webkit-scrollbar{
+      display: none;
+  }
+}

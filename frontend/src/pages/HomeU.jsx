@@ -9,7 +9,7 @@ const HomeU = () => {
     
 
     return (
-        <div className='Dark' style={{ height: "100vh " }}>
+        <div className='dark' style={{ height: "100vh " }}>
             {state ? <CarsByUser /> : <CarForSeller/>}
           
         </div>

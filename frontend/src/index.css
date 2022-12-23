@@ -82,14 +82,7 @@ h1 {
 .navbar a:focus {
   color: rgba(0, 0, 0, 0.9) !important;
 }
-.UpdateImg {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 5px;
-}
+
 
 .UpdateImg div {
   width: 110px;
@@ -100,11 +93,10 @@ h1 {
   height: 110px;
   object-fit: contain;
 }
-/* .UpdateImg>span> img:hover{
- background-color: ;
-} */
+
 .containerX {
   display: flex;
+  text-align: center;
   justify-content: center;
   border: 1px solid black;
   border-radius: 5px;
@@ -122,3 +114,14 @@ h1 {
   font-size: 14px;
   cursor: pointer;
 }
+.CursorType{
+  cursor: pointer;
+}
+.carousel {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.d-flex{
+  align-items: center;
+}
+  
