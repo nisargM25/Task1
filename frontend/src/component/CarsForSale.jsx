@@ -1,16 +1,19 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/auth';
+// import { AuthContext } from '../context/auth';
 import "./Cars.scss";
 
 const CarsForSale = () => {
-    const { currentUser } = useContext(AuthContext);
+    // const { currentUser } = useContext(AuthContext);
     const [cars, setCars] = useState([]);
+    const [page, setPage] = useState(1);
+    const limit = 10;
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get(`http://10.0.3.98:9000/api/cars/`);
+                const res = await axios.get(`http://10.0.3.98:9000/api/cars/?page=${page}&limit=${limit}`);
                 setCars(res.data);
             }
             catch (err) {
@@ -18,14 +21,31 @@ const CarsForSale = () => {
             }
         }
         fetchProducts()
-    }, [currentUser])
+    }, [page])
     // console.log(cars)
-
+    function handlePageNextChange(event, newPage) {
+        event.preventDefault();
+        if (cars.length > 0 || page < 0) {
+            setPage(newPage);
+        }
+    }
+    function handlePagePreviousChange(event, newPage) {
+        event.preventDefault();
+        if (page>1) {
+            setPage(newPage);
+        }
+    }
     return (
         <div className='dark'>
             <section className="dark">
                 <div className="container py-4">
                     <h1 className="h1 text-center" id="pageHeaderTitle">Cars</h1>
+                    <button className='btn btn-outline-light m-3' onClick={event => handlePagePreviousChange(event, page - 1)}>
+                        Previous
+                    </button>
+                    <button className='btn btn-outline-light m-3' onClick={event => handlePageNextChange(event, page + 1)}>
+                        Next
+                    </button>
                     {
                         cars.length > 0 ? (
                             cars.map(car => (
@@ -49,10 +69,11 @@ const CarsForSale = () => {
                                 </article>
                             ))) : (
                             <div>
-                                <h1> No Car For Sale</h1>
+                                <h1> No More Car For Sale</h1>
                             </div>
                         )
                     }
+
                 </div>
             </section>
 

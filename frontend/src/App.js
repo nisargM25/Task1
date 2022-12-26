@@ -1,6 +1,4 @@
 import React from 'react';
-// import Home from "./pages/Home";
-// import HomeU from "./pages/HomeU";
 import './index.css'
 import './global.scss'
 import { Navigate, Route, Routes } from "react-router-dom";

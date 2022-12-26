@@ -2,8 +2,11 @@ import { db } from '../db.js';
 
 
 export const getAllCars = (req, res) => {
-    const q = "Select * from vehicle order by id desc";
-    db.query(q, (err, data) => {
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page - 1) * limit;
+    const q = "Select * from vehicle order by id desc LIMIT ? OFFSET ? ";
+    db.query(q,[limit, offset] ,(err, data) => {
         if (err) return res.send(err)
         return res.status(200).json(data);
     })
