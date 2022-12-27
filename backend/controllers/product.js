@@ -4,7 +4,7 @@ import { db } from '../db.js';
 export const getAllCars = (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const page = parseInt(req.query.page) || 1;
-    const offset = (page - 1) * limit;
+    const offset = (page-1) * limit;
     const q = "Select * from vehicle order by id desc LIMIT ? OFFSET ? ";
     db.query(q,[limit, offset] ,(err, data) => {
         if (err) return res.send(err)
@@ -13,24 +13,31 @@ export const getAllCars = (req, res) => {
 }
 
 export const getAllCarsByUser = (req, res) => {
-    const id = req.params.id;
-    const q = "Select * from vehicle where seller_id=? order by id desc";
-    db.query(q, [id], (err, data) => {
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page-1) * limit;
+    const id = req.user.id;
+    const q = "Select * from vehicle where seller_id=? order by id desc LIMIT ? OFFSET ? ";
+    db.query(q, [id,limit, offset], (err, data) => {
         if (err) return res.send(err)
         return res.status(200).json(data);
     })
 }
+
 export const getAllCarsNotByUser = (req, res) => {
-    const id = req.params.id;
-    const q = "Select * from vehicle where seller_id!=? order by id desc";
-    db.query(q, [id], (err, data) => {
+    const limit = parseInt(req.query.limit) || 10;
+    const page = parseInt(req.query.page) || 1;
+    const offset = (page-1) * limit;
+    const id = req.user.id;
+    const q = "Select * from vehicle where seller_id!=? order by id desc LIMIT ? OFFSET ? ";
+    db.query(q, [id,limit, offset], (err, data) => {
         if (err) return res.send(err)
         return res.status(200).json(data);
     })
 }
 
 export const deleteCar = (req, res) => {
-    const id = req.params.id;
+    const id = req.user.id;
     const q = "delete from vehicle where id=?";
     db.query(q, [id], (err, data) => {
         if (err) return res.send(err)

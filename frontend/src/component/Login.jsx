@@ -43,7 +43,7 @@ const Login = () => {
                                 <h1 className="text-center text-dark my-1">Login</h1>
 
                                 <div className="text-center logo">
-                                    <img src="https://www.autodap.parts/img/logo-top.svg" className="img-fluid  img-thumbnail my-2" alt="profile" />
+                                    <img src="./images/logo.png" className="img-fluid  img-thumbnail my-2" alt="profile" />
                                 </div>
                                 <div className="my-3">
                                     <input type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className="form-control" name="name" id="Username" placeholder="Enter Username or Email Id" />

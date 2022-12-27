@@ -26,7 +26,7 @@ export const sellCarValidation = Yup.object({
     date: Yup.date().required("Manufacturing Date is Required").max(getMaxDate(), "Manufacturing Date should be before today's date"),
     miles: Yup.number().typeError('Miles must be a number').required("Number of Miles is Required"),
     images: Yup.mixed().required("Atleast 1 image of the car is Required").test("type", "Only Images are Supported", function (value) { return (value && value[0] && value[0].type === 'image/png') || (value && value[0] && value[0].type === 'image/svg+xml') || (value && value[0] && value[0].type === 'image/jpeg') || (value && value[0] && value[0].type === 'image/gif') || (value && value[0] && value[0].type === 'image/bmp') || (value && value[0] && value[0].type === 'image/tiff') || (value && value[0] && value[0].type === 'image/webp') || (value && value[0] && value[0].type === 'image/jpg') }),
-    price: Yup.string().required("Price Range of the car"),
+    price: Yup.number().typeError('Price must be a number').required("Price Range of the car"),
 });
 export const updateCarValidation = Yup.object({
     make: Yup.string().required("Car Make of car is Required"),
@@ -34,5 +34,5 @@ export const updateCarValidation = Yup.object({
     regNo: Yup.string().min(6, "Registration Plate/License Number must be of 6 digits").required("Registration Plate/License Number is Required"),
     date: Yup.date().required("Manufacturing Date is Required").max(getMaxDate(), "Manufacturing Date should be before today's date"),
     miles: Yup.number().typeError('Miles must be a number').required("Number of Miles is Required"),
-    price: Yup.string().required("Price Range of the car"),
+    price: Yup.number().typeError('Price must be a number').required("Price Range of the car"),
 });

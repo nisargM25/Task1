@@ -8,20 +8,40 @@ import "./Cars.scss"
 const CarsByUser = () => {
     const { currentUser } = useContext(AuthContext);
     const [cars, setCars] = useState([]);
+    const [page, setPage] = useState(1);
+    const [flag, setFlag] = useState(1);
+    const limit = 10;
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get(`http://10.0.3.98:9000/api/cars/user/${currentUser.id}`, { headers: { authorization: `Bearer ${currentUser.accessToken}` } });
-                setCars(res.data);
+                const res = await axios.get(`http://10.0.3.98:9000/api/cars/user?page=${page}&limit=${limit}`, { headers: { authorization: `Bearer ${currentUser.accessToken}` } });
+                const data = await res.data
+                setCars(pre => [...pre, ...data]);
+                if(JSON.stringify(data)==="[]"){
+                    setFlag(0);
+                }
             }
             catch (err) {
                 console.log(err)
             }
         }
         fetchProducts()
-    }, [currentUser])
+    }, [currentUser, page])
 
-    // console.log(cars)
+    useEffect(() => {
+        const handleScroll = (e) => {
+            const scrollHeight = e.target.documentElement.scrollHeight;
+            const currentHeight = e.target.documentElement.scrollTop + window.innerHeight;
+            if (currentHeight + 1 >= scrollHeight) {
+                if (flag === 1) {
+                    setPage(page + 1)
+                }
+            }
+        }
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    })
 
     return (
         <div className='dark'>
@@ -44,7 +64,7 @@ const CarsByUser = () => {
                                         <div className="postcard__preview-txt">
                                             <p>Car Number: {car.registrationNumber}</p>
                                             <p>Miles Covered: {car.miles}</p>
-                                            <p>Price Range: {car.sellingPriceRange}</p>
+                                            <p>Price Range: ${car.sellingPriceRange}</p>
                                             <p></p>
                                         </div>
                                     </div>

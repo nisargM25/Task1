@@ -15,7 +15,7 @@ const Profile = () => {
                         <div className="card para">
                             <div className='profile-container'>
                                 <div className="card profile" >
-                                    <img src="https://www.autodap.parts/img/logo-top.svg" className="card-img-top logo img-thumbnail" alt="..." />
+                                    <img src="./images/logo.png" className="card-img-top logo img-thumbnail" alt="..." />
                                     <div className="card-body  text-center">
                                         <h1 className="card-title mb-3">{currentUser.name}</h1>
                                         <p className="card-text">

@@ -1,20 +1,23 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { AuthContext } from '../context/auth';
 import "./Cars.scss";
 
 const CarsForSale = () => {
-    // const { currentUser } = useContext(AuthContext);
     const [cars, setCars] = useState([]);
     const [page, setPage] = useState(1);
+    const [flag, setFlag] = useState(1);
     const limit = 10;
-
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const res = await axios.get(`http://10.0.3.98:9000/api/cars/?page=${page}&limit=${limit}`);
-                setCars(res.data);
+                const data = await res.data
+                setCars(pre => [...pre, ...data]);
+                
+                if(JSON.stringify(data)==="[]"){
+                    setFlag(0);
+                }
             }
             catch (err) {
                 console.log(err)
@@ -22,30 +25,27 @@ const CarsForSale = () => {
         }
         fetchProducts()
     }, [page])
-    // console.log(cars)
-    function handlePageNextChange(event, newPage) {
-        event.preventDefault();
-        if (cars.length > 0 || page < 0) {
-            setPage(newPage);
+    
+    useEffect(() => {
+        const handleScroll = (e) => {
+            const scrollHeight = e.target.documentElement.scrollHeight;
+            const currentHeight = e.target.documentElement.scrollTop + window.innerHeight;
+            if (currentHeight + 1 >= scrollHeight) {
+                if (flag === 1) {
+                    setPage(page + 1)
+                }
+            }
         }
-    }
-    function handlePagePreviousChange(event, newPage) {
-        event.preventDefault();
-        if (page>1) {
-            setPage(newPage);
-        }
-    }
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    })
+
     return (
         <div className='dark'>
             <section className="dark">
                 <div className="container py-4">
                     <h1 className="h1 text-center" id="pageHeaderTitle">Cars</h1>
-                    <button className='btn btn-outline-light m-3' onClick={event => handlePagePreviousChange(event, page - 1)}>
-                        Previous
-                    </button>
-                    <button className='btn btn-outline-light m-3' onClick={event => handlePageNextChange(event, page + 1)}>
-                        Next
-                    </button>
+
                     {
                         cars.length > 0 ? (
                             cars.map(car => (
@@ -62,7 +62,7 @@ const CarsForSale = () => {
                                         <div className="postcard__preview-txt">
                                             <p>Car Number: {car.registrationNumber}</p>
                                             <p>Miles Covered: {car.miles}</p>
-                                            <p>Price Range: {car.sellingPriceRange}</p>
+                                            <p>Price Range: ${car.sellingPriceRange}</p>
                                             <p></p>
                                         </div>
                                     </div>
