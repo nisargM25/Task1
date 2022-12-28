@@ -36,3 +36,6 @@ export const updateCarValidation = Yup.object({
     miles: Yup.number().typeError('Miles must be a number').required("Number of Miles is Required"),
     price: Yup.number().typeError('Price must be a number').required("Price Range of the car"),
 });
+export const placeBid = Yup.object({
+    bid: Yup.number().typeError('Price must be a number').required("Bid of the car"),
+});

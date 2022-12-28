@@ -31,10 +31,10 @@
       background-color: transparent;
       color: white; 
       cursor: pointer;
-      padding: 0.5% 1.2% 1% 1.2%; 
+      padding: 0.25% 0.75% 0.75% 0.75%; 
       /* padding: 5px 18px 15px 18px; */
-      border-radius: 15px;
-      font-size: 16px;
+      border-radius: 50%;
+      font-size: 20px;
     }
 
     #myBtn:hover {
@@ -55,7 +55,7 @@
     let mybutton = document.getElementById("myBtn");
     window.onscroll = function () { scrollFunction() };
     function scrollFunction() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         mybutton.style.display = "block";
       } else {
         mybutton.style.display = "none";

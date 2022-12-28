@@ -14,6 +14,7 @@ import UpdateCar from "./component/UpdateCar";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./component/Navbar";
 import Detail from "./pages/Detail";
+import Bid from "./pages/Bid";
 const LazyHome=React.lazy(()=>import("./pages/Home"))
 const LazyHomeU=React.lazy(()=>import("./pages/HomeU"))
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='/profile' element={currentUser ? <Profile /> :<Navigate replace to="/" /> } />
         <Route path='/sellcar' element={currentUser ? <SellCar />:<Navigate replace to="/" />} />
         <Route path='/car/:id' element={currentUser ? <SingleProduct />:<Navigate replace to="/" />} />
+        <Route path='/offerReceived/:id' element={currentUser ? <Bid />:<Navigate replace to="/" />} />
         <Route path='/updateCar/:id' element={currentUser ? <UpdateCar />:<Navigate replace to="/" />} />
         <Route path="*" element={<Navigate replace to="/" />} />
         {/* <Route path='*' element={!currentUser ? <Login /> : <Profile />}/> */}

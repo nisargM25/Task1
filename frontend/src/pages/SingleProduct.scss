@@ -8,13 +8,17 @@
 .details-card {
     width: 80%;
     margin: auto;
+    overflow: hidden;
     color: black;
 }
 
 
 .description-container {
     position: relative;
-    margin: auto;
+    // margin: auto;
+    display: flex;
+    align-items: center;
+    background-color: lightgrey;
     //  height: 900px; 
 }
 
@@ -27,6 +31,7 @@
 }
 
 .main-description h3 {
+    text-transform: capitalize  ;
     font-size: 2rem;
 }
 
