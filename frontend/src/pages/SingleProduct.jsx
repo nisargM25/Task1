@@ -92,12 +92,13 @@ const SingleProduct = () => {
                                     </div>) : (
                                         //bid form
                                         <form onSubmit={handleSubmit}>
-                                            <div className="my-1">
+                                            <div className="my-1 form-floating">
                                                 <input type="text" value={values.bid} onChange={handleChange} className="form-control" name="bid" id="Bid" placeholder="Offer for Car" />
+                                                <label htmlFor="Bid">Offer for car</label>
                                                 {errors.bid ? <p className='form-error'>{errors.bid}</p> : null}
                                             </div>
                                             <div>
-                                                {<button type="submit" className="btn btn-outline-dark w-50" >Offer for car</button>}
+                                                {<button type="submit" className="btn btn-outline-dark w-50" >Place Offer</button>}
                                             </div>
                                         </form>
                                     )}

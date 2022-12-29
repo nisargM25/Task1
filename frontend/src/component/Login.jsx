@@ -45,12 +45,14 @@ const Login = () => {
                                 <div className="text-center logo">
                                     <img src="./images/logo.png" className="img-fluid  img-thumbnail my-2" alt="profile" />
                                 </div>
-                                <div className="my-3">
+                                <div className="form-floating my-3">
                                     <input type="text" value={values.name} onChange={handleChange} onBlur={handleBlur} className="form-control" name="name" id="Username" placeholder="Enter Username or Email Id" />
+                                    <label htmlFor="Username">Email address or Username</label>
                                     {errors.name && touched.name ? <p className='form-error'>{errors.name}</p> : null}
                                 </div>
-                                <div className="mb-3">
+                                <div className="form-floating mb-3">
                                     <input type="password" value={values.password} onChange={handleChange} onBlur={handleBlur} className="form-control" name="password" id="Password" placeholder="Password" />
+                                    <label htmlFor="Password">Password</label>
                                     {errors.password && touched.password ? <p className='form-error'>{errors.password}</p> : null}
                                 </div>
                                 <div className="text-center"><button type="submit" className="btn btn-outline-dark px-1 mb-2 w-100" >Login</button>

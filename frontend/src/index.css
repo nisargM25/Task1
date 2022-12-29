@@ -124,4 +124,10 @@ h1 {
 .d-flex{
   align-items: center;
 }
-  
+label{
+  color: black;
+  font-size: 14px;
+}
+input{
+  padding: 0;
+}
