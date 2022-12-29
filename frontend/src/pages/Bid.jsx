@@ -11,7 +11,7 @@ const Bid = () => {
     const state = location.state;
     const id = location.pathname.split("/")[2];
     
-    console.log(details);
+    // console.log(details);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -32,7 +32,7 @@ const Bid = () => {
         <div className='dark' style={{ height: "100vh" }}>
             <div className="container my-5">
             <h2 className='text-center'>Offers for {state.make} {state.model}</h2>
-                <div className="card details-card p-3">
+                <div className="card detail-card p-3">
                     <table className="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -50,7 +50,7 @@ const Bid = () => {
                                 <td> {detail.userEmail} </td>
                                 <td> {detail.userContact} </td>
                                 <td> {detail.offerByUser} </td>
-                                <td> {detail.bidDateTime.substring(0, 10)} {detail.bidDateTime.substring(11, 22) } </td>
+                                <td> {detail.bidDateTime.substring(0, 10)} {detail.bidDateTime.substring(11, 19) } </td>
                             </tr>
                             ))}
                         </tbody>

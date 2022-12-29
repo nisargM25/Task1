@@ -51,11 +51,11 @@ const Detail = () => {
                                     <p className="product-description mb-1">Miles Covered: {scar.miles}</p>
 
                                     <div className="my-1">
-                                        <input type="text" className="form-control" name="bid" id="Bid" disabled placeholder="Bid for Car" />
-                                        {<p className='form-error'>Login required for placing bid</p>}
+                                        <input type="text" className="form-control" name="bid" id="Bid" disabled placeholder="Offer for Car" />
+                                        {<p className='form-error'>Login required for placing offer</p>}
                                     </div>
                                     <div>
-                                        <Link to="/login"><button type="submit" className="btn btn-outline-dark w-50" >Login</button></Link>
+                                        <Link to="/login"><button type="submit" className="btn btn-outline-dark w-50" >Place offer</button></Link>
                                     </div>
                                 </div>
                             </div>

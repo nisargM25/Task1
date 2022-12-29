@@ -37,5 +37,5 @@ export const updateCarValidation = Yup.object({
     price: Yup.number().typeError('Price must be a number').required("Price Range of the car"),
 });
 export const placeBid = Yup.object({
-    bid: Yup.number().typeError('Price must be a number').required("Bid of the car"),
+    bid: Yup.number().typeError('Price must be a number').required("Offer of the car"),
 });
