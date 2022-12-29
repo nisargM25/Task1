@@ -114,7 +114,7 @@ const UpdateCar = () => {
                                     <label htmlFor="Miles">Miles</label>
                                     {errors.miles && touched.miles ? <p className='form-error'>{errors.miles}</p> : null}
                                 </div>
-                                <div className="mb-1 form-floating">
+                                <div className="mb-1 ">
                                     <input type="file" accept='image/*' multiple onChange={(e) => { setFieldValue("images", e.currentTarget.files) }} onBlur={handleBlur} className="form-control" name="images" id="Images" />
                                     {errors.images && touched.images ? <p className='form-error'>{errors.images}</p> : null}
                                     <div className='UpdateImg' >

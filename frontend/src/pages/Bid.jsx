@@ -29,7 +29,7 @@ const Bid = () => {
 
     // console.log(id);
     return (
-        <div className='dark' style={{ height: "100vh" }}>
+        <div className='dark' style={{ minHeight: "100vh" }}>
             <div className="container my-5">
             <h2 className='text-center'>Offers for {state.make} {state.model}</h2>
                 <div className="card detail-card p-3">

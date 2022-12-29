@@ -5,7 +5,7 @@ import '../component/Cars.scss';
 const Home = () => {
 
     return (
-        <div className='dark' style={{ height: "100vh" }}>
+        <div className='dark' style={{ minHeight: "100vh" }}>
         
             <CarsForSale/>
             
