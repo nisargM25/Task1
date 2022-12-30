@@ -27,7 +27,7 @@ const SingleProduct = () => {
             values.sellerId = car[0].seller_id;
             try {
                 await axios.post(`http://10.0.3.98:9000/api/cars/offer`, values, { headers: { authorization: `Bearer ${currentUser.accessToken}` } });
-                toast.success("Successfully Placed Bid");
+                toast.success("Successfully Placed Offer");
                 navigate("/");
             } catch (error) {
                 toast.error(error.response.data)
@@ -83,7 +83,7 @@ const SingleProduct = () => {
                                     <p className="product-description mb-1">Car Number: {scar.registrationNumber}</p>
                                     <p className="product-description mb-1">Date of Manufacture: {scar.dateOfManufacturing.substring(0, 10)}</p>
                                     <p className="product-description mb-1">Miles Covered: {scar.miles}</p>
-                                    {/* <p className="product-description mb-4">Price Range: {scar.sellingPriceRange}</p> */}
+                                    
                                     {currentUser.id === scar.seller_id ? (<div className="cart mt-3 align-items-center">
                                         <hr />
                                         <Link to={`/updateCar/${scar.id}`} state={scar}><button className="btn btn-dark text-uppercase m-2 px-4">Update</button></Link>

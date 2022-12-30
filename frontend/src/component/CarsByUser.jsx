@@ -18,7 +18,7 @@ const CarsByUser = () => {
                 const res = await axios.get(`http://10.0.3.98:9000/api/cars/user?page=${page}&limit=${limit}`, { headers: { authorization: `Bearer ${currentUser.accessToken}` } });
                 const data = await res.data
                 setCars(pre => [...pre, ...data]);
-                if(JSON.stringify(data)==="[]"){
+                if (JSON.stringify(data) === "[]") {
                     setFlag(0);
                 }
             }
@@ -47,34 +47,74 @@ const CarsByUser = () => {
         <div className='dark'>
             <section className="dark">
                 <div className="container py-4">
-                    <h1 className="h1 text-center" id="pageHeaderTitle">My Cars</h1>
-                    {
-                        cars.length > 0 ? (
-                            cars.map(car => (
-                                <article className="postcard dark blue" key={car.id}>
-                                    < img className="postcard__img" src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="ImageTitle" />
-                                    <div className="postcard__text">
-                                        <h1 className="postcard__title blue"><Link to={`/car/${car.id}`}>{car.make} {car.model}</Link></h1>
-                                        <div className="postcard__subtitle small">
-                                            <div>
-                                                {car.dateOfManufacturing.substring(0, 10)}
+                    <div className="packages-content">
+                        <div className="row">
+                            {
+                                cars.length > 0 ? (
+                                    cars.map(car => (
+                                        <div className="col-md-4 col-sm-6" key={car.id}>
+                                            <div className="single-package-item light">
+                                                <div className='ShopPage'>
+                                                    
+                                                        <img src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="package-place" />
+                                                    
+                                                </div>
+                                                <div className="single-package-item-txt">
+                                                    <h3><Link to={`/car/${car.id}`}>{car.make}<br />{car.model}</Link><br /> <span >${car.sellingPriceRange}</span></h3>
+                                                    <div className="packages-para">
+                                                        <p>
+                                                            <>
+                                                                <i className="fa fa-angle-right"></i> Number: {car.registrationNumber}
+                                                            </>
+                                                        </p>
+                                                        <p>
+                                                            <i className="fa fa-angle-right"></i> Miles Covered: {car.miles}
+                                                        </p>
+                                                        <p>
+                                                            <>
+                                                                <i className="fa fa-angle-right"></i> Date: {car.dateOfManufacturing.substring(0, 10)}
+                                                            </>
+                                                        </p>
+
+                                                    </div>
+                                                    <div className="packages-review">
+
+                                                    </div>
+                                                    {/* <div className="about-btn">
+                                                        <button className="btn btn-outline-dark">
+                                                            book now
+                                                        </button>
+                                                    </div> */}
+                                                </div>
                                             </div>
+
                                         </div>
-                                        <div className="postcard__bar"></div>
-                                        <div className="postcard__preview-txt">
-                                            <p>Car Number: {car.registrationNumber}</p>
-                                            <p>Miles Covered: {car.miles}</p>
-                                            <p>Price Range: ${car.sellingPriceRange}</p>
-                                            <p></p>
-                                        </div>
+                                        // <article className="postcard dark blue" key={car.id}>
+                                        //     < img className="postcard__img" src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="ImageTitle" />
+                                        //     <div className="postcard__text">
+                                        //         <h1 className="postcard__title blue"><Link to={`/car/${car.id}`}>{car.make} {car.model}</Link></h1>
+                                        //         <div className="postcard__subtitle small">
+                                        //             <div>
+                                        //                 {car.dateOfManufacturing.substring(0, 10)}
+                                        //             </div>
+                                        //         </div>
+                                        //         <div className="postcard__bar"></div>
+                                        //         <div className="postcard__preview-txt">
+                                        //             <p>Car Number: {car.registrationNumber}</p>
+                                        //             <p>Miles Covered: {car.miles}</p>
+                                        //             <p>Price Range: ${car.sellingPriceRange}</p>
+                                        //             <p></p>
+                                        //         </div>
+                                        //     </div>
+                                        // </article>
+                                    ))) : (
+                                    <div>
+                                        <h1> No Car For Sale</h1>
                                     </div>
-                                </article>
-                            ))) : (
-                            <div>
-                                <h1> No Car For Sale</h1>
-                            </div>
-                        )
-                    }
+                                )
+                            }
+                        </div>
+                    </div>
                 </div>
             </section>
 

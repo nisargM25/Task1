@@ -129,3 +129,16 @@ label {
 input {
   padding: 0;
 }
+.ShopPage{
+  height: 250px;
+  object-fit: cover;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  /* border-bottom: 1px solid black */
+}
+.ShopPage>img{
+margin: auto;
+}

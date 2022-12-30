@@ -11,7 +11,7 @@ const Navbar = () => {
     }
     return (
         <div>
-            <nav className="navbar navbar-expand-lg  navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to='/'>
                         <img className="img-fluid mx-2 navbarBrand" src="http://10.0.3.98:3000/images/logo.png" alt="" />
