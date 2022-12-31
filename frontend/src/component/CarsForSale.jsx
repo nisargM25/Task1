@@ -53,9 +53,7 @@ const CarsForSale = () => {
                                         <div className="col-md-4 col-sm-6" key={car.id}>
                                             <div className="single-package-item light">
                                                 <div className='ShopPage'>
-                                                    <Link to={`/carDetail/${car.id}`}>
-                                                        <img src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="package-place" />
-                                                    </Link>
+                                                    <img src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="imag-eplace" />
                                                 </div>
                                                 <div className="single-package-item-txt">
                                                     <h3><Link to={`/carDetail/${car.id}`}>{car.make}<br />{car.model}</Link><br /> <span >${car.sellingPriceRange}</span></h3>

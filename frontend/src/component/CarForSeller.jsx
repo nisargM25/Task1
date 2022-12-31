@@ -49,16 +49,13 @@ const CarForSeller = () => {
                 <div className="container py-4">
                     <div className="packages-content">
                         <div className="row">
-                        
                             {
                                 cars.length > 0 ? (
                                     cars.map(car => (
                                         <div className="col-md-4 col-sm-6" key={car.id}>
                                             <div className="single-package-item light">
                                                 <div className='ShopPage'>
-                                                    
-                                                        <img src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="package-place" />
-                                                    
+                                                    <img src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="imag-eplace" />
                                                 </div>
                                                 <div className="single-package-item-txt">
                                                     <h3><Link to={`/car/${car.id}`}>{car.make}<br />{car.model}</Link><br /> <span >${car.sellingPriceRange}</span></h3>
@@ -76,16 +73,10 @@ const CarForSeller = () => {
                                                                 <i className="fa fa-angle-right"></i> Date: {car.dateOfManufacturing.substring(0, 10)}
                                                             </>
                                                         </p>
-
                                                     </div>
                                                     <div className="packages-review">
 
                                                     </div>
-                                                    {/* <div className="about-btn">
-                                                        <button className="btn btn-outline-dark">
-                                                            book now
-                                                        </button>
-                                                    </div> */}
                                                 </div>
                                             </div>
 

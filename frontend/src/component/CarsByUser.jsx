@@ -55,9 +55,7 @@ const CarsByUser = () => {
                                         <div className="col-md-4 col-sm-6" key={car.id}>
                                             <div className="single-package-item light">
                                                 <div className='ShopPage'>
-                                                    
-                                                        <img src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="package-place" />
-                                                    
+                                                    <img src={`./upload/${car.images.split(",").splice(0, 1)}`} alt="imag-eplace" />
                                                 </div>
                                                 <div className="single-package-item-txt">
                                                     <h3><Link to={`/car/${car.id}`}>{car.make}<br />{car.model}</Link><br /> <span >${car.sellingPriceRange}</span></h3>
