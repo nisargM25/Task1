@@ -4,14 +4,14 @@ import { AuthContext } from "../context/auth";
 
 
 const Navbar = () => {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);    
     const logout = () => {
-        localStorage.clear();
+        sessionStorage.clear();
         window.location.reload()
     }
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor:"#e3f2fd" }}>
                 <div className="container-fluid">
                     <Link className="navbar-brand" to='/'>
                         <img className="img-fluid mx-2 navbarBrand" src="http://10.0.3.98:3000/images/logo.png" alt="" />
@@ -50,7 +50,7 @@ const Navbar = () => {
                                             <li><Link className="dropdown-item " onClick={logout}>Logout</Link></li>
                                         </ul>
                                     </li>
-                                </ul>) : (<Link to="/login"><button className="btn btn-outline-dark" type="submit">Login</button></Link>)
+                                </ul>) : (<Link to="/login"><button className="btn btn-outline-secondary" type="submit">Login</button></Link>)
                             }
                             {/* <span class="navbar-text">
                                 Nisarg

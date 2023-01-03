@@ -9,7 +9,7 @@ const HomeU = () => {
     
 
     return (
-        <div className='dark' style={{ height: "100vh " }}>
+        <div className='dark' style={{ height: "calc(100vh - 65px) " }}>
             {state ? <CarsByUser /> : <CarForSeller/>}
           
         </div>

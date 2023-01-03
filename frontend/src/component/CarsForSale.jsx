@@ -101,7 +101,7 @@ const CarsForSale = () => {
                                         // </article>
                                     ))) : (
                                     <div>
-                                        <h1> No More Car For Sale</h1>
+                                        <h1 className='text-center'> No More Car For Sale</h1>
                                     </div>
                                 )
                             }

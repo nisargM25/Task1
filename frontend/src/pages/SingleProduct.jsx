@@ -58,7 +58,7 @@ const SingleProduct = () => {
     }
 
     return (
-        <div className='dark d-flex' style={{ minHeight: "100vh" }}>
+        <div className='dark d-flex' style={{ minHeight: "calc(100vh - 65px)" }}>
             <div className="container my-5">
                 <div className="card details-card p-0">
                     {car.map(scar => (

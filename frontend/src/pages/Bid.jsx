@@ -29,7 +29,8 @@ const Bid = () => {
 
     // console.log(id);
     return (
-        <div className='dark' style={{ minHeight: "100vh" }}>
+        <div className='dark'>
+        {/* <div className='dark' style={{ minHeight: "calc(100vh - 65px)" }}> */}
             <div className="container my-5">
             <h2 className='text-center'>Offers for {state.make} {state.model}</h2>
                 <div className="card detail-card p-3">
@@ -53,7 +54,11 @@ const Bid = () => {
                                 <td> {detail.bidDateTime.substring(0, 10)} {detail.bidDateTime.substring(11, 19) } </td>
                             </tr>
                             ))}
+                            {details.length<1&&<tr>
+                                <td colSpan={5} className='text-center'> <h5>No offer received</h5> </td>
+                            </tr>}
                         </tbody>
+                        
                     </table>
                 </div>
             </div>

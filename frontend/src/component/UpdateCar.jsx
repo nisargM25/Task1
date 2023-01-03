@@ -13,7 +13,7 @@ const UpdateCar = () => {
     const [img, setImg] = useState(state.images.split(","))
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log(state)
+    // console.log(state)
 
     const initialValues = {
         make: state?.make,
@@ -27,7 +27,7 @@ const UpdateCar = () => {
         price: state?.sellingPriceRange,
         sid: currentUser.id,
     }
-    console.log(initialValues)
+    // console.log(initialValues)
 
     const { values, errors, touched, handleBlur, setFieldValue, handleChange, handleSubmit } = useFormik({
         initialValues,

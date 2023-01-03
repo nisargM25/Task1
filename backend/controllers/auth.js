@@ -60,7 +60,7 @@ export const login = (req, res) => {
             // check password
             const isPasswordCorrect = bcrypt.compareSync(req.body.password, data[0].password)
             if (!isPasswordCorrect) return res.status(400).json("Wrong Email or Password")
-            const token = jwt.sign({ id: data[0].id }, "AuthJwt");
+            const token = jwt.sign({ id: data[0].id }, "AuthJwt",{ expiresIn: '24h' });
             console.log(token)
             data[0].accessToken = token;
             
@@ -71,8 +71,3 @@ export const login = (req, res) => {
     })
 }
 
-export const logout = (req, res) => {
-    res.clearCookie('access_token', { httpOnly: true }).status(200).json("Logged Out");
-    // res.clearCookie("access_token",{ httpOnly: true, sameSite:"none",secure:true }).status(200).json("Logged Out")
-
-}

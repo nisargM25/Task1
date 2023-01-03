@@ -5,15 +5,15 @@ html {
 .App {
   font-family: "Poppins", sans-serif;
   margin-top: auto;
-  min-height: 100vh;
+  min-height: calc(100vh - 65px);
   background-image: url("../public/images/BackGround.jpg");
   background-size: cover;
 }
 .App > .container {
-  min-height: 100vh;
+  min-height: calc(100vh - 65px);
 }
 .RowMain {
-  min-height: 100vh;
+  min-height: calc(100vh - 65px);
 }
 
 .btn-color {

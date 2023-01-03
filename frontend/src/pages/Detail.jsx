@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
 import './SingleProduct.scss'
-
 import { Carousel } from 'react-bootstrap';
 
 const Detail = () => {
@@ -25,7 +23,7 @@ const Detail = () => {
     }, [id])
 
     return (
-        <div className='dark d-flex' style={{ minHeight: "100vh" }}>
+        <div className='dark d-flex' style={{ minHeight: "calc(100vh - 65px)" }}>
             <div className="container my-5">
                 <div className="card details-card p-0">
                     {car.map(scar => (

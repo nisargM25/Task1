@@ -101,7 +101,7 @@ const CarForSeller = () => {
                                         // </article>
                                     ))) : (
                                     <div>
-                                        <h1> No Car For Sale</h1>
+                                        <h1 className='text-center'> No Car For Sale</h1>
                                     </div>
                                 )
                             }
