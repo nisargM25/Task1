@@ -48,7 +48,7 @@ export const login = (req, res) => {
                 // check password
                 const isPasswordCorrect = bcrypt.compareSync(req.body.password, data[0].password)
                 if (!isPasswordCorrect) return res.status(400).json("Wrong Email or Password")
-                const token = jwt.sign({ id: data[0].id }, "AuthJwt");
+                const token = jwt.sign({ id: data[0].id }, "AuthJwt",{ expiresIn: '24h' });
                 console.log(token)
                 data[0].accessToken = token;
                 const { password, ...other } = data[0]
